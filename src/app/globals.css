@@ -89,6 +89,9 @@
   --brand: oklch(0.5 0.24 264);
   --brand-foreground: oklch(1 0 0);
   --brand-muted: oklch(0.94 0.06 264);
+
+  --bg-features: #F8FAFC;
+  --cta-bg: linear-gradient(135deg,#ede9fe 0%,#e0e7ff 55%,#ddd6fe 100%);
 }
 
 .dark {
@@ -123,6 +126,9 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+
+  --bg-features: #0f172a;
+  --cta-bg: linear-gradient(135deg,#1e1b4b 0%,#1e293b 55%,#2e1065 100%);
 }
 
 @layer base {

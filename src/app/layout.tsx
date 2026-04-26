@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ThemeProvider } from "@/components/theme-provider";
 import { Roboto_Condensed } from "next/font/google";
 import "./globals.css";
 
@@ -39,9 +40,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${robotoCondensed.className} h-full antialiased`}>
+    <html 
+      lang="en" 
+      suppressHydrationWarning 
+      className={`${robotoCondensed.className} h-full antialiased`}
+    >
       <body className="min-h-full flex flex-col">
-        {children}
+        <ThemeProvider
+          defaultTheme="light"
+          disableTransitionOnChange
+          attribute="class"
+          enableSystem
+        >
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

@@ -29,7 +29,7 @@ function scrollTo(id: string) {
 function Navbar() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-100">
-      <div className="max-w-7xl mx-auto px-8 py-4 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 py-4 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2.5">
           <div className="w-8 h-8 rounded-lg flex items-center justify-center shadow-sm" style={{ background: "linear-gradient(135deg,#6366f1,#8b5cf6)" }}>
             <Brain className="w-4 h-4 text-white" />
@@ -50,7 +50,7 @@ function Navbar() {
           ))}
         </nav>
         <Link
-          href="#"
+          href="/login"
           className="inline-flex items-center gap-2 px-5 py-2 rounded-lg text-white text-sm font-semibold hover:opacity-90 transition-opacity shadow-md"
           style={{ background: "linear-gradient(90deg,#6366f1,#7c3aed)" }}
         >
@@ -96,8 +96,8 @@ function Hero() {
       </div>
 
       <h1
-        className="relative z-10 font-extrabold tracking-tight text-slate-900 mb-6"
-        style={{ fontSize: "clamp(42px, 5.5vw, 64px)", lineHeight: 1.1, maxWidth: "820px" }}
+        className="relative z-10 font-extrabold tracking-tight text-slate-900 mb-6 px-4"
+        style={{ fontSize: "clamp(34px, 8vw, 64px)", lineHeight: 1.1, maxWidth: "820px" }}
       >
         Understand any codebase.
         <br />
@@ -113,15 +113,15 @@ function Hero() {
         </span>
       </h1>
 
-      <p className="relative z-10 text-[17px] text-slate-500 max-w-[540px] leading-relaxed mb-10">
+      <p className="relative z-10 text-[15px] sm:text-[17px] text-slate-500 max-w-[540px] leading-relaxed mb-10 px-4">
         RepoMind analyzes your GitHub repository and generates intelligent documentation,
         architecture insights, and answers — in seconds.
       </p>
 
-      <div className="relative z-10 flex items-center justify-center gap-4 mb-16">
+      <div className="relative z-10 flex flex-col sm:flex-row items-center justify-center gap-4 mb-16 w-full px-6">
         <Link
-          href="#"
-          className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-white font-semibold text-sm shadow-lg hover:opacity-90 transition-all hover:scale-[1.02] active:scale-[0.98]"
+          href="/login"
+          className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl text-white font-semibold text-sm shadow-lg hover:opacity-90 transition-all hover:scale-[1.02] active:scale-[0.98]"
           style={{ background: "linear-gradient(90deg, #6366f1, #7c3aed)" }}
         >
           Get Started Free <ArrowRight className="w-4 h-4" />
@@ -129,7 +129,7 @@ function Hero() {
 
         <Link
           href="#"
-          className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-slate-200 bg-white text-slate-700 font-semibold text-sm hover:border-indigo-300 hover:text-indigo-700 transition-all hover:scale-[1.02]"
+          className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl border border-slate-200 bg-white text-slate-700 font-semibold text-sm hover:border-indigo-300 hover:text-indigo-700 transition-all hover:scale-[1.02]"
         >
           <CalendarCheck className="w-4 h-4" /> Book a Demo
         </Link>
@@ -139,6 +139,71 @@ function Hero() {
         <DashboardPreview />
       </div>
     </section>
+  );
+}
+
+function MobileDashboardPreview() {
+  const stats = [
+    { label: "Files", val: "12,842", icon: FileText, color: "text-indigo-500" },
+    { label: "Functions", val: "8,591", icon: Zap, color: "text-amber-500" },
+    { label: "Components", val: "1,243", icon: Cpu, color: "text-emerald-500" },
+    { label: "Deps", val: "321", icon: GitBranch, color: "text-blue-500" },
+  ];
+
+  return (
+    <div className="w-full max-w-[340px] mx-auto rounded-3xl overflow-hidden border border-slate-200 bg-white shadow-2xl">
+      <div className="bg-slate-50/80 px-5 py-4 border-b border-slate-100 flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <div className="w-6 h-6 rounded-lg bg-linear-to-br from-indigo-600 to-purple-600 flex items-center justify-center">
+            <Brain className="w-3.5 h-3.5 text-white" />
+          </div>
+          <span className="text-[13px] font-bold text-slate-800">RepoMind</span>
+        </div>
+
+        <div className="flex gap-1">
+          <span className="w-2 h-2 rounded-full bg-slate-200" />
+          <span className="w-2 h-2 rounded-full bg-slate-200" />
+        </div>
+      </div>
+
+      <div className="p-5">
+        <div className="flex items-center justify-between mb-5">
+          <div>
+            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-0.5">Project</p>
+            <p className="text-sm font-bold text-slate-900">vercel/next.js</p>
+          </div>
+          <div className="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-600 text-[10px] font-bold border border-emerald-100">
+            Live
+          </div>
+        </div>
+
+        <div className="grid grid-cols-2 gap-3 mb-6">
+          {stats.map(({ label, val, icon: Icon, color }) => (
+            <div key={label} className="p-3 rounded-2xl bg-slate-50/50 border border-slate-100">
+              <div className="flex items-center gap-2 mb-2">
+                <Icon className={`w-3.5 h-3.5 ${color}`} />
+                <span className="text-[10px] font-medium text-slate-500">{label}</span>
+              </div>
+              <p className="text-base font-bold text-slate-900">{val}</p>
+            </div>
+          ))}
+        </div>
+
+        <div className="p-4 rounded-2xl bg-linear-to-br from-indigo-50 to-purple-50 border border-indigo-100 mb-6">
+          <div className="flex items-center justify-between mb-3">
+            <p className="text-[11px] font-bold text-indigo-900">Codebase Health</p>
+            <span className="text-sm font-black text-indigo-600">92%</span>
+          </div>
+          <div className="h-2 w-full bg-white/60 rounded-full overflow-hidden">
+            <div className="h-full bg-linear-to-r from-indigo-500 to-purple-500 rounded-full" style={{ width: "92%" }} />
+          </div>
+        </div>
+
+        <button className="w-full py-3 rounded-xl bg-slate-900 text-white text-[13px] font-bold shadow-lg shadow-slate-200 active:scale-95 transition-transform">
+          View Documentation
+        </button>
+      </div>
+    </div>
   );
 }
 
@@ -175,140 +240,148 @@ function DashboardPreview() {
   ];
 
   return (
-    <div className="rounded-2xl overflow-hidden border border-slate-200 bg-white text-left shadow-[0_32px_80px_rgba(99,102,241,0.15),0_8px_24px_rgba(0,0,0,0.08)]">
-      <div className="flex items-center gap-3 px-5 py-3.5 border-b border-slate-100 bg-slate-50/70">
-        <div className="flex gap-1.5">
-          <span className="w-3 h-3 rounded-full bg-red-400" />
-          <span className="w-3 h-3 rounded-full bg-yellow-400" />
-          <span className="w-3 h-3 rounded-full bg-emerald-400" />
-        </div>
-        <div className="flex items-center gap-2 ml-2">
-          <div className="w-5 h-5 rounded-md bg-linear-to-br from-indigo-600 to-purple-600 flex items-center justify-center">
-            <Brain className="w-3 h-3 text-white" />
-          </div>
-          <span className="text-xs font-semibold text-slate-700">RepoMind</span>
-        </div>
-        <div className="ml-auto flex items-center gap-2 px-3 py-1 rounded-lg bg-white border border-slate-200 text-xs text-slate-400">
-          <Search className="w-3 h-3" /> Search anything…
-          <span className="ml-3 text-[10px] font-mono bg-slate-100 px-1.5 py-0.5 rounded text-slate-500">⌘K</span>
-        </div>
+    <>
+      <div className="md:hidden">
+        <MobileDashboardPreview />
       </div>
 
-      <div className="flex" style={{ height: 440 }}>
-        <aside className="w-48 border-r border-slate-100 bg-slate-50/60 flex flex-col py-3 px-2 gap-0.5 shrink-0">
-          {sideItems.map(({ icon: Icon, label, active }) => (
-            <button key={label} className={`flex items-center gap-2 px-3 py-2 rounded-md text-xs font-medium transition-colors ${active ? "bg-indigo-100 text-indigo-700" : "text-slate-500 hover:bg-slate-100"}`}>
-              <Icon className="w-3.5 h-3.5" />{label}
-            </button>
-          ))}
-          <div className="mt-auto px-2 pt-3 border-t border-slate-100">
-            <p className="text-[10px] text-slate-400 font-medium uppercase tracking-wide">Repository</p>
-            <p className="text-[11px] font-semibold text-slate-700 mt-1 truncate">vercel/next.js</p>
-            <button className="mt-2 w-full px-2 py-1.5 rounded-md bg-indigo-600 text-white text-[10px] font-semibold">Sync Now</button>
-            <div className="flex gap-2 mt-3">
-              <SiGithub className="w-3.5 h-3.5 text-slate-400 hover:text-slate-600 cursor-pointer" />
-              <BsTwitter className="w-3.5 h-3.5 text-slate-400 hover:text-slate-600 cursor-pointer" />
+      <div className="hidden md:block w-full overflow-x-auto pb-4 scrollbar-hide">
+        <div className="min-w-[850px] rounded-2xl overflow-hidden border border-slate-200 bg-white text-left shadow-[0_32px_80px_rgba(99,102,241,0.15),0_8px_24px_rgba(0,0,0,0.08)]">
+          <div className="flex items-center gap-3 px-5 py-3.5 border-b border-slate-100 bg-slate-50/70">
+            <div className="flex gap-1.5">
+              <span className="w-3 h-3 rounded-full bg-red-400" />
+              <span className="w-3 h-3 rounded-full bg-yellow-400" />
+              <span className="w-3 h-3 rounded-full bg-emerald-400" />
             </div>
-          </div>
-        </aside>
-
-        <main className="flex-1 p-4 overflow-hidden flex flex-col">
-          <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider mb-3">Overview</p>
-          <div className="grid grid-cols-4 gap-2 mb-4">
-            {stats.map(({ label, val, icon: Icon }) => (
-              <div key={label} className="rounded-xl bg-slate-50 border border-slate-100 p-3">
-                <div className="flex items-center gap-1 mb-1.5"><Icon className="w-3 h-3 text-indigo-400" /><span className="text-[9px] text-slate-400">{label}</span></div>
-                <p className="text-sm font-bold text-slate-800">{val}</p>
+            <div className="flex items-center gap-2 ml-2">
+              <div className="w-5 h-5 rounded-md bg-linear-to-br from-indigo-600 to-purple-600 flex items-center justify-center">
+                <Brain className="w-3 h-3 text-white" />
               </div>
-            ))}
-          </div>
-
-          <div className="grid grid-cols-2 gap-3 mb-3">
-            <div className="rounded-xl border border-slate-100 p-3 bg-white">
-              <div className="flex items-center justify-between mb-2">
-                <p className="text-[11px] font-semibold text-slate-700">Architecture Overview</p>
-                <span className="text-[10px] text-indigo-500 font-medium cursor-pointer">View full architecture →</span>
-              </div>
-              <div className="flex items-center gap-1 mb-2 flex-wrap">
-                {["Web (Next.js)", "API (Node.js)", "Database (PostgreSQL)"].map((n, i) => (
-                  <div key={n} className="flex items-center gap-1">
-                    <span className="px-2 py-0.5 rounded bg-slate-100 text-[9px] font-medium text-slate-600 border border-slate-200">{n}</span>
-                    {i < 2 && <span className="text-slate-300 text-[9px]">→</span>}
-                  </div>
-                ))}
-              </div>
-              <div className="flex items-center gap-1 flex-wrap">
-                {["Auth", "Billing", "Users", "Notifications"].map((n, i) => (
-                  <div key={n} className="flex items-center gap-1">
-                    <span className="px-2 py-0.5 rounded bg-slate-50 text-[9px] font-medium text-slate-500 border border-slate-100">{n}</span>
-                    {i < 3 && <span className="text-slate-200 text-[8px]">+</span>}
-                  </div>
-                ))}
-              </div>
+              <span className="text-xs font-semibold text-slate-700">RepoMind</span>
             </div>
-            <div className="rounded-xl border border-slate-100 p-3 bg-white">
-              <p className="text-[11px] font-semibold text-slate-700 mb-2">Recent Activity</p>
-              <div className="space-y-2">
-                {activity.map(({ text, time, color }) => (
-                  <div key={text} className="flex items-center justify-between">
-                    <div className="flex items-center gap-1.5"><span className={`w-1.5 h-1.5 rounded-full ${color}`} /><span className="text-[10px] text-slate-600">{text}</span></div>
-                    <span className="text-[10px] text-slate-400">{time}</span>
-                  </div>
-                ))}
-              </div>
-              <p className="text-[10px] text-indigo-500 font-medium mt-2 cursor-pointer">View all</p>
+            <div className="ml-auto flex items-center gap-2 px-3 py-1 rounded-lg bg-white border border-slate-200 text-xs text-slate-400">
+              <Search className="w-3 h-3" /> Search anything…
+              <span className="ml-3 text-[10px] font-mono bg-slate-100 px-1.5 py-0.5 rounded text-slate-500">⌘K</span>
             </div>
           </div>
 
-          <div className="rounded-xl border border-slate-100 p-3 bg-white flex-1">
-            <p className="text-[11px] font-semibold text-slate-700 mb-1.5">Documentation Summary</p>
-            <p className="text-[10px] text-slate-500 leading-relaxed mb-2">
-              This is a Next.js application built with React, TypeScript and Tailwind CSS. It follows a modular structure with separated concerns for UI, API routes, utilities, and services.
-            </p>
-            <div className="flex gap-1.5 flex-wrap">
-              {["Next.js", "React", "TypeScript", "Tailwind CSS"].map((t) => (
-                <span key={t} className="px-2 py-0.5 rounded text-[9px] font-medium text-indigo-600 bg-indigo-50 border border-indigo-100">{t}</span>
+          <div className="flex" style={{ height: 440 }}>
+            <aside className="w-48 border-r border-slate-100 bg-slate-50/60 flex flex-col py-3 px-2 gap-0.5 shrink-0">
+              {sideItems.map(({ icon: Icon, label, active }) => (
+                <button key={label} className={`flex items-center gap-2 px-3 py-2 rounded-md text-xs font-medium transition-colors ${active ? "bg-indigo-100 text-indigo-700" : "text-slate-500 hover:bg-slate-100"}`}>
+                  <Icon className="w-3.5 h-3.5" />{label}
+                </button>
               ))}
-            </div>
-          </div>
-        </main>
+              <div className="mt-auto px-2 pt-3 border-t border-slate-100">
+                <p className="text-[10px] text-slate-400 font-medium uppercase tracking-wide">Repository</p>
+                <p className="text-[11px] font-semibold text-slate-700 mt-1 truncate">vercel/next.js</p>
+                <button className="mt-2 w-full px-2 py-1.5 rounded-md bg-indigo-600 text-white text-[10px] font-semibold">Sync Now</button>
+                <div className="flex gap-2 mt-3">
+                  <SiGithub className="w-3.5 h-3.5 text-slate-400 hover:text-slate-600 cursor-pointer" />
+                  <BsTwitter className="w-3.5 h-3.5 text-slate-400 hover:text-slate-600 cursor-pointer" />
+                </div>
+              </div>
+            </aside>
 
-        <aside className="w-52 border-l border-slate-100 bg-white p-4 shrink-0 flex flex-col">
-          <p className="text-[11px] font-semibold text-slate-700 mb-3">Codebase Health</p>
-          <div className="flex justify-center mb-4">
-            <div className="relative w-24 h-24">
-              <svg className="w-full h-full -rotate-90" viewBox="0 0 96 96">
-                <circle cx="48" cy="48" r="40" fill="none" stroke="#ede9fe" strokeWidth="9" />
-                <circle cx="48" cy="48" r="40" fill="none" stroke="url(#grad2)" strokeWidth="9" strokeLinecap="round" strokeDasharray={`${2 * Math.PI * 40 * 0.92} ${2 * Math.PI * 40}`} />
-                <defs>
-                  <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stopColor="#6366f1" />
-                    <stop offset="100%" stopColor="#a855f7" />
-                  </linearGradient>
-                </defs>
-              </svg>
-              <div className="absolute inset-0 flex flex-col items-center justify-center">
-                <p className="text-base font-extrabold text-slate-800">92%</p>
-                <p className="text-[9px] text-slate-500">Healthy</p>
+            <main className="flex-1 p-4 overflow-hidden flex flex-col">
+              <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider mb-3">Overview</p>
+              <div className="grid grid-cols-4 gap-2 mb-4">
+                {stats.map(({ label, val, icon: Icon }) => (
+                  <div key={label} className="rounded-xl bg-slate-50 border border-slate-100 p-3">
+                    <div className="flex items-center gap-1 mb-1.5"><Icon className="w-3 h-3 text-indigo-400" /><span className="text-[9px] text-slate-400">{label}</span></div>
+                    <p className="text-sm font-bold text-slate-800">{val}</p>
+                  </div>
+                ))}
               </div>
-            </div>
-          </div>
-          <div className="space-y-2.5">
-            {health.map(({ label, val }) => (
-              <div key={label}>
-                <div className="flex justify-between mb-0.5">
-                  <span className="text-[10px] text-slate-500">{label}</span>
-                  <span className="text-[10px] font-semibold text-slate-600">{val}%</span>
+
+              <div className="grid grid-cols-2 gap-3 mb-3">
+                <div className="rounded-xl border border-slate-100 p-3 bg-white">
+                  <div className="flex items-center justify-between mb-2">
+                    <p className="text-[11px] font-semibold text-slate-700">Architecture Overview</p>
+                    <span className="text-[10px] text-indigo-500 font-medium cursor-pointer">View full architecture →</span>
+                  </div>
+                  <div className="flex items-center gap-1 mb-2 flex-wrap">
+                    {["Web (Next.js)", "API (Node.js)", "Database (PostgreSQL)"].map((n, i) => (
+                      <div key={n} className="flex items-center gap-1">
+                        <span className="px-2 py-0.5 rounded bg-slate-100 text-[9px] font-medium text-slate-600 border border-slate-200">{n}</span>
+                        {i < 2 && <span className="text-slate-300 text-[9px]">→</span>}
+                      </div>
+                    ))}
+                  </div>
+                  <div className="flex items-center gap-1 flex-wrap">
+                    {["Auth", "Billing", "Users", "Notifications"].map((n, i) => (
+                      <div key={n} className="flex items-center gap-1">
+                        <span className="px-2 py-0.5 rounded bg-slate-50 text-[9px] font-medium text-slate-500 border border-slate-100">{n}</span>
+                        {i < 3 && <span className="text-slate-200 text-[8px]">+</span>}
+                      </div>
+                    ))}
+                  </div>
                 </div>
-                <div className="h-1 rounded-full bg-indigo-100">
-                  <div className="h-full rounded-full" style={{ width: `${val}%`, background: "linear-gradient(90deg,#6366f1,#a855f7)" }} />
+                <div className="rounded-xl border border-slate-100 p-3 bg-white">
+                  <p className="text-[11px] font-semibold text-slate-700 mb-2">Recent Activity</p>
+                  <div className="space-y-2">
+                    {activity.map(({ text, time, color }) => (
+                      <div key={text} className="flex items-center justify-between">
+                        <div className="flex items-center gap-1.5"><span className={`w-1.5 h-1.5 rounded-full ${color}`} /><span className="text-[10px] text-slate-600">{text}</span></div>
+                        <span className="text-[10px] text-slate-400">{time}</span>
+                      </div>
+                    ))}
+                  </div>
+                  <p className="text-[10px] text-indigo-500 font-medium mt-2 cursor-pointer">View all</p>
                 </div>
               </div>
-            ))}
+
+              <div className="rounded-xl border border-slate-100 p-3 bg-white flex-1">
+                <p className="text-[11px] font-semibold text-slate-700 mb-1.5">Documentation Summary</p>
+                <p className="text-[10px] text-slate-500 leading-relaxed mb-2">
+                  This is a Next.js application built with React, TypeScript and Tailwind CSS. It follows a modular structure with separated concerns for UI, API routes, utilities, and services.
+                </p>
+                <div className="flex gap-1.5 flex-wrap">
+                  {["Next.js", "React", "TypeScript", "Tailwind CSS"].map((t) => (
+                    <span key={t} className="px-2 py-0.5 rounded text-[9px] font-medium text-indigo-600 bg-indigo-50 border border-indigo-100">{t}</span>
+                  ))}
+                </div>
+              </div>
+            </main>
+
+            <aside className="w-52 border-l border-slate-100 bg-white p-4 shrink-0 flex flex-col">
+              <p className="text-[11px] font-semibold text-slate-700 mb-3">Codebase Health</p>
+              <div className="flex justify-center mb-4">
+                <div className="relative w-24 h-24">
+                  <svg className="w-full h-full -rotate-90" viewBox="0 0 96 96">
+                    <circle cx="48" cy="48" r="40" fill="none" stroke="#ede9fe" strokeWidth="9" />
+                    <circle cx="48" cy="48" r="40" fill="none" stroke="url(#grad2)" strokeWidth="9" strokeLinecap="round" strokeDasharray={`${2 * Math.PI * 40 * 0.92} ${2 * Math.PI * 40}`} />
+                    <defs>
+                      <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stopColor="#6366f1" />
+                        <stop offset="100%" stopColor="#a855f7" />
+                      </linearGradient>
+                    </defs>
+                  </svg>
+                  <div className="absolute inset-0 flex flex-col items-center justify-center">
+                    <p className="text-base font-extrabold text-slate-800">92%</p>
+                    <p className="text-[9px] text-slate-500">Healthy</p>
+                  </div>
+                </div>
+              </div>
+              <div className="space-y-2.5">
+                {health.map(({ label, val }) => (
+                  <div key={label}>
+                    <div className="flex justify-between mb-0.5">
+                      <span className="text-[10px] text-slate-500">{label}</span>
+                      <span className="text-[10px] font-semibold text-slate-600">{val}%</span>
+                    </div>
+                    <div className="h-1 rounded-full bg-indigo-100">
+                      <div className="h-full rounded-full" style={{ width: `${val}%`, background: "linear-gradient(90deg,#6366f1,#a855f7)" }} />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </aside>
           </div>
-        </aside>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 
@@ -324,10 +397,10 @@ const TRUST_LOGOS = [
 function TrustedBy() {
   return (
     <section className="py-12 border-y border-slate-100 bg-[#F8FAFC]">
-      <p className="text-center text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-400 mb-8">
+      <p className="text-center text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.15em] sm:tracking-[0.18em] text-slate-400 mb-8 px-4">
         Trusted by developers at
       </p>
-      <div className="max-w-4xl mx-auto px-8 flex items-center justify-between gap-6">
+      <div className="max-w-4xl mx-auto px-6 sm:px-8 flex flex-wrap items-center justify-center gap-x-8 gap-y-6 md:justify-between">
         {TRUST_LOGOS.map(({ icon: Icon, label }) => (
           <div key={label} className="flex items-center gap-2 text-slate-400 hover:text-slate-600 transition-colors cursor-default select-none">
             <Icon className="w-5 h-5 shrink-0" />
@@ -350,12 +423,12 @@ const FEATURES = [
 
 function Features() {
   return (
-    <section id="features" className="py-20 px-4" style={{ background: "#F8FAFC" }}>
+    <section id="features" className="py-20 px-6 sm:px-8" style={{ background: "#F8FAFC" }}>
       <div className="max-w-5xl mx-auto">
         <div className="flex justify-center mb-5">
-          <span className="px-4 py-1 rounded-full bg-white border border-slate-200 text-indigo-600 text-[11px] font-semibold uppercase tracking-wider shadow-sm">Features</span>
+          <span className="px-4 py-1 rounded-full bg-white border border-slate-200 text-indigo-600 text-[10px] md:text-[11px] font-semibold uppercase tracking-wider shadow-sm">Features</span>
         </div>
-        <h2 className="text-[40px] font-extrabold text-center text-slate-900 tracking-tight mb-12" style={{ lineHeight: 1.18 }}>
+        <h2 className="text-2xl sm:text-3xl md:text-[40px] font-extrabold text-center text-slate-900 tracking-tight mb-10 md:mb-12" style={{ lineHeight: 1.18 }}>
           Everything you need to<br />
           understand{" "}
           <span style={{ background: "linear-gradient(90deg,#6366f1,#8b5cf6)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>any codebase</span>
@@ -387,17 +460,16 @@ const STEPS = [
 
 function HowItWorks() {
   return (
-    <section id="how-it-works" className="py-24 px-4 bg-slate-50/60">
+    <section id="how-it-works" className="py-24 px-6 sm:px-8 bg-slate-50/60">
       <div className="max-w-6xl mx-auto">
         <div className="flex justify-center mb-5">
-          <span className="px-4 py-1.5 rounded-full bg-indigo-50 border border-indigo-200 text-indigo-700 text-xs font-semibold uppercase tracking-wider">How It Works</span>
+          <span className="px-4 py-1.5 rounded-full bg-indigo-50 border border-indigo-200 text-indigo-700 text-[10px] md:text-xs font-semibold uppercase tracking-wider">How It Works</span>
         </div>
-        <h2 className="text-4xl md:text-5xl font-extrabold text-center text-slate-900 tracking-tight mb-4">
+        <h2 className="text-2xl sm:text-3xl md:text-5xl font-extrabold text-center text-slate-900 tracking-tight mb-4 leading-tight">
           From repo link to deep understanding<br />
           <span className="bg-linear-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">in 4 simple steps</span>
         </h2>
-        <p className="text-center text-slate-500 mb-16 max-w-lg mx-auto">No complex setup. No configuration. Just paste and go.</p>
-
+        <p className="text-center text-slate-400 md:text-slate-500 mb-12 md:mb-16 max-w-lg mx-auto text-xs sm:text-sm md:text-base px-4">No complex setup. No configuration. Just paste and go.</p>
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 relative">
           <div className="hidden md:block absolute top-12 left-[12.5%] right-[12.5%] h-px bg-linear-to-r from-indigo-200 via-purple-300 to-indigo-200" />
           {STEPS.map(({ n, icon: Icon, title, desc }) => (
@@ -420,7 +492,7 @@ function CTABanner() {
   return (
     <section className="px-4 py-12 max-w-5xl mx-auto">
       <div
-        className="relative overflow-hidden rounded-2xl px-10 py-10 flex flex-col md:flex-row items-center gap-8"
+        className="relative overflow-hidden rounded-2xl px-6 sm:px-10 py-12 md:py-10 flex flex-col md:flex-row items-center gap-8 text-center md:text-left"
         style={{ background: "linear-gradient(135deg,#ede9fe 0%,#e0e7ff 55%,#ddd6fe 100%)" }}
       >
         <div className="shrink-0" style={{ width: 90, height: 90, position: "relative" }}>
@@ -457,7 +529,7 @@ function CTABanner() {
         </div>
         <div className="shrink-0 flex flex-col items-center gap-1.5">
           <Link
-            href="#"
+            href="/login"
             className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-white font-bold text-sm hover:opacity-90 transition-all shadow-md hover:scale-[1.02] whitespace-nowrap"
             style={{ background: "linear-gradient(90deg,#6366f1,#7c3aed)" }}
           >
@@ -471,7 +543,6 @@ function CTABanner() {
 }
 
 function Footer() {
-
   return (
     <footer className="border-t border-slate-100 bg-white pt-12 pb-8">
       <div className="max-w-4xl mx-auto px-8 flex justify-center">
@@ -483,7 +554,12 @@ function Footer() {
 
 export default function Home() {
   return (
-    <div className="min-h-screen overflow-x-hidden" style={{ background: "#F8FAFC" }}>
+    <div
+      className="min-h-screen overflow-x-hidden"
+      style={{
+        background: "#F8FAFC"
+      }}
+    >
       <Navbar />
       <Hero />
       <TrustedBy />

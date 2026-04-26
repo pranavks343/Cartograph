@@ -64,32 +64,6 @@ function Navbar() {
 function Hero() {
   return (
     <section className="relative overflow-hidden pt-28 pb-20 flex flex-col items-center text-center px-4">
-      <div
-        className="absolute pointer-events-none"
-        style={{
-          top: "-80px",
-          left: "50%",
-          transform: "translateX(-10%)",
-          width: "900px",
-          height: "700px",
-          background:
-            "radial-gradient(ellipse at 55% 30%, rgba(167,139,250,0.38) 0%, rgba(196,181,253,0.22) 35%, rgba(224,231,255,0.12) 60%, transparent 80%)",
-          filter: "blur(1px)",
-        }}
-      />
-      <div
-        className="absolute pointer-events-none"
-        style={{
-          top: "60px",
-          left: "-100px",
-          width: "420px",
-          height: "420px",
-          background:
-            "radial-gradient(ellipse at center, rgba(196,181,253,0.20) 0%, transparent 70%)",
-          filter: "blur(2px)",
-        }}
-      />
-
       <div className="relative z-10 inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/70 border border-indigo-200 text-indigo-600 text-xs font-semibold mb-8 shadow-sm">
         <Sparkles className="w-3.5 h-3.5" />
         AI Documentation for Codebases
@@ -246,7 +220,7 @@ function DashboardPreview() {
       </div>
 
       <div className="hidden md:block w-full overflow-x-auto pb-4 scrollbar-hide">
-        <div className="min-w-[850px] rounded-2xl overflow-hidden border border-slate-200 bg-white text-left shadow-[0_32px_80px_rgba(99,102,241,0.15),0_8px_24px_rgba(0,0,0,0.08)]">
+        <div className="min-w-[850px] rounded-2xl overflow-hidden border border-slate-200 bg-white text-left shadow-sm">
           <div className="flex items-center gap-3 px-5 py-3.5 border-b border-slate-100 bg-slate-50/70">
             <div className="flex gap-1.5">
               <span className="w-3 h-3 rounded-full bg-red-400" />

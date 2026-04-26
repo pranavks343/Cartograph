@@ -15,6 +15,7 @@ import { ModeToggle } from "@/components/mode-toggle";
 import { motion } from "framer-motion";
 
 const NAV_LINKS = [
+  { label: "Home", id: "home" },
   { label: "Features", id: "features" },
   { label: "How It Works", id: "how-it-works" }
 ];
@@ -68,7 +69,7 @@ function Navbar() {
 
 function Hero() {
   return (
-    <section className="relative overflow-hidden pt-28 pb-20 flex flex-col items-center text-center px-4">
+    <section id="home" className="relative overflow-hidden pt-28 pb-20 flex flex-col items-center text-center px-4">
       <div className="relative z-10 inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/70 dark:bg-slate-900/70 border border-indigo-200 dark:border-indigo-800 text-indigo-600 dark:text-indigo-400 text-xs font-semibold mb-8 shadow-sm">
         <Sparkles className="w-3.5 h-3.5" />
         AI Documentation for Codebases
@@ -448,6 +449,7 @@ function HowItWorks() {
           From repo link to deep understanding<br />
           <span className="bg-linear-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">in 4 simple steps</span>
         </h2>
+        
         <p className="text-center text-slate-400 md:text-slate-500 dark:text-slate-400 mb-12 md:mb-16 max-w-lg mx-auto text-xs sm:text-sm md:text-base px-4">No complex setup. No configuration. Just paste and go.</p>
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 relative">
           <div className="hidden md:block absolute top-12 left-[12.5%] right-[12.5%] h-px bg-linear-to-r from-indigo-200 via-purple-300 to-indigo-200 dark:from-indigo-900 dark:via-purple-800 dark:to-indigo-900" />

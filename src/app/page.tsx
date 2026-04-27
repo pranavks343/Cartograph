@@ -4,7 +4,6 @@ import { FaStackOverflow } from "react-icons/fa";
 import {
   SiVercel, SiNetlify, SiLinear, SiDocker, SiGithub
 } from "react-icons/si";
-import { BsTwitter } from "react-icons/bs";
 import {
   ArrowRight, BookOpen, CalendarCheck, Code2, FileText,
   Globe, Lock, MessageSquare, Search, Share2, Sparkles,
@@ -259,10 +258,6 @@ function DashboardPreview() {
                 <p className="text-[10px] text-slate-400 font-medium uppercase tracking-wide">Repository</p>
                 <p className="text-[11px] font-semibold text-slate-700 dark:text-slate-300 mt-1 truncate">vercel/next.js</p>
                 <button className="mt-2 w-full px-2 py-1.5 rounded-md bg-indigo-600 text-white text-[10px] font-semibold">Sync Now</button>
-                <div className="flex gap-2 mt-3">
-                  <SiGithub className="w-3.5 h-3.5 text-slate-400 hover:text-slate-600 cursor-pointer" />
-                  <BsTwitter className="w-3.5 h-3.5 text-slate-400 hover:text-slate-600 cursor-pointer" />
-                </div>
               </div>
             </aside>
 
@@ -314,7 +309,7 @@ function DashboardPreview() {
                 </div>
               </div>
 
-              <div className="rounded-xl border border-slate-100 dark:border-slate-800 p-3 bg-white dark:bg-slate-900 flex-1">
+              <div className="rounded-xl border border-slate-100 dark:border-slate-800 p-3 bg-white dark:bg-slate-900 flex flex-col">
                 <p className="text-[11px] font-semibold text-slate-700 dark:text-slate-300 mb-1.5">Documentation Summary</p>
                 <p className="text-[10px] text-slate-500 dark:text-slate-400 leading-relaxed mb-2">
                   This is a Next.js application built with React, TypeScript and Tailwind CSS. It follows a modular structure with separated concerns for UI, API routes, utilities, and services.
@@ -452,7 +447,6 @@ function HowItWorks() {
           From repo link to deep understanding<br />
           <span className="bg-linear-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">in 4 simple steps</span>
         </h2>
-
         <p className="text-center text-slate-400 md:text-slate-500 dark:text-slate-400 mb-12 md:mb-16 max-w-lg mx-auto text-xs sm:text-sm md:text-base px-4">No complex setup. No configuration. Just paste and go.</p>
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 relative">
           <div className="hidden md:block absolute top-12 left-[12.5%] right-[12.5%] h-px bg-linear-to-r from-indigo-200 via-purple-300 to-indigo-200 dark:from-indigo-900 dark:via-purple-800 dark:to-indigo-900" />

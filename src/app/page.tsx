@@ -13,6 +13,7 @@ import {
 import Link from "next/link";
 import { ModeToggle } from "@/components/mode-toggle";
 import { motion } from "framer-motion";
+import { useAuthProxy } from "@/lib/proxy";
 
 const NAV_LINKS = [
   { label: "Home", id: "home" },
@@ -28,7 +29,7 @@ function scrollTo(id: string) {
   window.scrollTo({ top, behavior: "smooth" });
 }
 
-function Navbar() {
+function Navbar({ isLoggedIn }: { isLoggedIn: boolean }) {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-slate-950/80 backdrop-blur-md border-b border-slate-100 dark:border-slate-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-8 py-4 flex items-center justify-between">
@@ -38,6 +39,7 @@ function Navbar() {
           </div>
           <span className="font-bold text-[15px] tracking-tight text-slate-900 dark:text-white">RepoMind</span>
         </Link>
+
         <nav className="hidden md:flex items-center gap-7">
           {NAV_LINKS.map(({ label, id }) => (
             <motion.button
@@ -51,15 +53,16 @@ function Navbar() {
             </motion.button>
           ))}
         </nav>
-        
+
         <div className="flex items-center gap-3">
           <ModeToggle />
+          
           <Link
-            href="/login"
+            href={isLoggedIn ? "/dashboard" : "/login"}
             className="inline-flex items-center gap-2 px-5 py-2 rounded-lg text-white text-sm font-semibold hover:opacity-90 transition-opacity shadow-md"
             style={{ background: "linear-gradient(90deg,#6366f1,#7c3aed)" }}
           >
-            Sign In <ArrowRight className="w-3.5 h-3.5" />
+            {isLoggedIn ? "Dashboard" : "Sign In"} <ArrowRight className="w-3.5 h-3.5" />
           </Link>
         </div>
       </div>
@@ -67,7 +70,7 @@ function Navbar() {
   );
 }
 
-function Hero() {
+function Hero({ isLoggedIn }: { isLoggedIn: boolean }) {
   return (
     <section id="home" className="relative overflow-hidden pt-28 pb-20 flex flex-col items-center text-center px-4">
       <div className="relative z-10 inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/70 dark:bg-slate-900/70 border border-indigo-200 dark:border-indigo-800 text-indigo-600 dark:text-indigo-400 text-xs font-semibold mb-8 shadow-sm">
@@ -100,11 +103,11 @@ function Hero() {
 
       <div className="relative z-10 flex flex-col sm:flex-row items-center justify-center gap-4 mb-16 w-full px-6">
         <Link
-          href="/login"
+          href={isLoggedIn ? "/dashboard" : "/login"}
           className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl text-white font-semibold text-sm shadow-lg hover:opacity-90 transition-all hover:scale-[1.02] active:scale-[0.98]"
           style={{ background: "linear-gradient(90deg, #6366f1, #7c3aed)" }}
         >
-          Get Started Free <ArrowRight className="w-4 h-4" />
+          {isLoggedIn ? "Go to Dashboard" : "Get Started Free"} <ArrowRight className="w-4 h-4" />
         </Link>
 
         <Link
@@ -268,7 +271,7 @@ function DashboardPreview() {
               <div className="grid grid-cols-4 gap-2 mb-4">
                 {stats.map(({ label, val, icon: Icon }) => (
                   <div key={label} className="rounded-xl bg-slate-50 dark:bg-slate-900/50 border border-slate-100 dark:border-slate-800 p-3">
-                    <div className="flex items-center gap-1 mb-1.5"><Icon className="w-3 h-3 text-indigo-400" /><span className="text-[9px] text-slate-400">{label}</span></div>
+                    <div className="flex items-center gap-1.5"><Icon className="w-3 h-3 text-indigo-400" /><span className="text-[9px] text-slate-400">{label}</span></div>
                     <p className="text-sm font-bold text-slate-800 dark:text-white">{val}</p>
                   </div>
                 ))}
@@ -449,7 +452,7 @@ function HowItWorks() {
           From repo link to deep understanding<br />
           <span className="bg-linear-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">in 4 simple steps</span>
         </h2>
-        
+
         <p className="text-center text-slate-400 md:text-slate-500 dark:text-slate-400 mb-12 md:mb-16 max-w-lg mx-auto text-xs sm:text-sm md:text-base px-4">No complex setup. No configuration. Just paste and go.</p>
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 relative">
           <div className="hidden md:block absolute top-12 left-[12.5%] right-[12.5%] h-px bg-linear-to-r from-indigo-200 via-purple-300 to-indigo-200 dark:from-indigo-900 dark:via-purple-800 dark:to-indigo-900" />
@@ -457,7 +460,7 @@ function HowItWorks() {
             <div key={n} className="relative flex flex-col items-center text-center group">
               <div className="relative z-10 w-24 h-24 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-md shadow-indigo-50 dark:shadow-none flex flex-col items-center justify-center mb-5 group-hover:border-indigo-300 dark:group-hover:border-indigo-700 group-hover:shadow-indigo-100 transition-all">
                 <Icon className="w-7 h-7 text-indigo-500 mb-1" />
-                <span className="text-[10px] font-bold text-slate-300 dark:text-slate-600">{n}</span>
+                <span className="text-[10px] font-bold text-slate-300 dark:text-600">{n}</span>
               </div>
               <h3 className="text-base font-bold text-slate-900 dark:text-white mb-2">{title}</h3>
               <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed max-w-[180px]">{desc}</p>
@@ -469,7 +472,7 @@ function HowItWorks() {
   );
 }
 
-function CTABanner() {
+function CTABanner({ isLoggedIn }: { isLoggedIn: boolean }) {
   return (
     <section className="px-4 py-12 max-w-5xl mx-auto">
       <div
@@ -510,11 +513,11 @@ function CTABanner() {
         </div>
         <div className="shrink-0 flex flex-col items-center gap-1.5">
           <Link
-            href="/login"
+            href={isLoggedIn ? "/dashboard" : "/login"}
             className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-white font-bold text-sm hover:opacity-90 transition-all shadow-md hover:scale-[1.02] whitespace-nowrap"
             style={{ background: "linear-gradient(90deg,#6366f1,#7c3aed)" }}
           >
-            Get Started Free <ArrowRight className="w-4 h-4" />
+            {isLoggedIn ? "Go to Dashboard" : "Get Started Free"} <ArrowRight className="w-4 h-4" />
           </Link>
           <span className="text-[11px] text-slate-400 dark:text-slate-500">No credit card required</span>
         </div>
@@ -534,16 +537,27 @@ function Footer() {
 }
 
 export default function Home() {
+  const { session, isPending } = useAuthProxy();
+  const isLoggedIn = !!session;
+
+  if (isPending) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-[#F8FAFC] dark:bg-slate-950">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600"></div>
+      </div>
+    );
+  }
+
   return (
     <div
       className="min-h-screen overflow-x-hidden bg-[#F8FAFC] dark:bg-slate-950"
     >
-      <Navbar />
-      <Hero />
+      <Navbar isLoggedIn={isLoggedIn} />
+      <Hero isLoggedIn={isLoggedIn} />
       <TrustedBy />
       <Features />
       <HowItWorks />
-      <CTABanner />
+      <CTABanner isLoggedIn={isLoggedIn} />
       <Footer />
     </div>
   );

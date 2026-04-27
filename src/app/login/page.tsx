@@ -9,8 +9,27 @@ import {
   Zap,
   Brain
 } from "lucide-react";
+import { useAuthProxy } from "@/lib/proxy";
+import { authClient } from "@/lib/auth-client";
 
 export default function LoginPage() {
+  const { isPending } = useAuthProxy();
+
+  const handleSignIn = async () => {
+    await authClient.signIn.social({
+      provider: "github",
+      callbackURL: "/dashboard",
+    });
+  };
+
+  if (isPending) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-white dark:bg-slate-950">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600"></div>
+      </div>
+    );
+  }
+
   return (
     <main className="min-h-screen flex flex-col md:flex-row bg-white dark:bg-slate-950">
       <div className="hidden md:flex md:w-[50%] lg:w-[55%] relative overflow-hidden bg-slate-50 dark:bg-slate-900 border-r border-slate-100 dark:border-slate-800">
@@ -47,7 +66,10 @@ export default function LoginPage() {
               </p>
             </div>
 
-            <button className="w-full flex items-center justify-center gap-3 bg-[#0F172A] dark:bg-indigo-600 hover:bg-slate-800 dark:hover:bg-indigo-700 text-white font-semibold py-3.5 md:py-4 px-6 rounded-2xl transition-all shadow-xl shadow-slate-200/50 dark:shadow-none mb-6 md:mb-8 active:scale-[0.98] text-sm md:text-base cursor-pointer border-none">
+            <button 
+              onClick={handleSignIn}
+              className="w-full flex items-center justify-center gap-3 bg-[#0F172A] dark:bg-indigo-600 hover:bg-slate-800 dark:hover:bg-indigo-700 text-white font-semibold py-3.5 md:py-4 px-6 rounded-2xl transition-all shadow-xl shadow-slate-200/50 dark:shadow-none mb-6 md:mb-8 active:scale-[0.98] text-sm md:text-base cursor-pointer border-none"
+            >
               <SiGithub className="w-5 h-5" />
               <span>Continue with GitHub</span>
             </button>

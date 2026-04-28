@@ -90,8 +90,8 @@
   --brand-foreground: oklch(1 0 0);
   --brand-muted: oklch(0.94 0.06 264);
 
-  --bg-features: #F8FAFC;
-  --cta-bg: linear-gradient(135deg,#ede9fe 0%,#e0e7ff 55%,#ddd6fe 100%);
+  --bg-features: #f8fafc;
+  --cta-bg: linear-gradient(135deg, #ede9fe 0%, #e0e7ff 55%, #ddd6fe 100%);
 }
 
 .dark {
@@ -128,7 +128,7 @@
   --sidebar-ring: oklch(0.556 0 0);
 
   --bg-features: #0f172a;
-  --cta-bg: linear-gradient(135deg,#1e1b4b 0%,#1e293b 55%,#2e1065 100%);
+  --cta-bg: linear-gradient(135deg, #1e1b4b 0%, #1e293b 55%, #2e1065 100%);
 }
 
 @layer base {
@@ -311,24 +311,54 @@
   scrollbar-width: thin;
   scrollbar-color: transparent transparent;
 }
+
 *:hover {
   scrollbar-color: rgba(99, 102, 241, 0.12) transparent;
 }
+
 ::-webkit-scrollbar {
   width: 4px;
   height: 4px;
 }
+
 ::-webkit-scrollbar-track {
   background: transparent;
 }
+
 ::-webkit-scrollbar-thumb {
   background: transparent;
   border-radius: 99px;
   transition: background 0.3s;
 }
+
 *:hover::-webkit-scrollbar-thumb {
   background: rgba(99, 102, 241, 0.15);
 }
+
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(99, 102, 241, 0.3) !important;
+}
+
+@keyframes theme-circle-expand {
+  from {
+    mask-size: 0;
+  }
+  to {
+    mask-size: 250vmax;
+  }
+}
+
+::view-transition-new(root) {
+  mask: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"><circle cx="20" cy="20" r="20" fill="white"/></svg>')
+    50% 50% / 0 no-repeat;
+  animation: theme-circle-expand 0.8s cubic-bezier(0.65, 0, 0.35, 1) both;
+}
+
+::view-transition-old(root) {
+  animation: none;
+  z-index: -1;
+}
+
+::view-transition-image-pair(root) {
+  isolation: auto;
 }

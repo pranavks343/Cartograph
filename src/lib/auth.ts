@@ -1,6 +1,6 @@
+import { db } from "./db";
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
-import { db } from "./db";
 import * as schema from "./schema";
 
 export const auth = betterAuth({
@@ -13,10 +13,12 @@ export const auth = betterAuth({
             verification: schema.verification,
         }
     }),
+    
     socialProviders: {
         github: {
             clientId: process.env.GITHUB_CLIENT_ID!,
             clientSecret: process.env.GITHUB_CLIENT_SECRET!,
+            scope: ["repo"],
         },
     },
 });

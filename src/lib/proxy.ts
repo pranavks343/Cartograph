@@ -3,9 +3,12 @@ import { useRouter, usePathname } from "next/navigation";
 import { useEffect } from "react";
 
 export const useAuthProxy = () => {
-    const router = useRouter();
     const pathname = usePathname();
-    const { data: session, isPending } = authClient.useSession();
+    const router = useRouter();
+    const {
+        isPending,
+        data: session
+    } = authClient.useSession();
 
     useEffect(() => {
         if (isPending) return;
@@ -15,8 +18,8 @@ export const useAuthProxy = () => {
                 router.push("/dashboard");
             }
         } else {
-            if (pathname === "/dashboard") {
-                router.push("/login");
+            if (pathname.startsWith("/dashboard")) {
+                router.push("/");
             }
         }
     }, [session, isPending, router, pathname]);

@@ -113,7 +113,7 @@ function Hero({ isLoggedIn }: { isLoggedIn: boolean }) {
           href="#"
           className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 font-semibold text-sm hover:border-indigo-300 dark:hover:border-indigo-700 hover:text-indigo-700 dark:hover:text-indigo-300 transition-all hover:scale-[1.02]"
         >
-          <CalendarCheck className="w-4 h-4" /> Book a Demo
+          <CalendarCheck className="w-4 h-4" /> Time to Fathom
         </Link>
       </div>
 

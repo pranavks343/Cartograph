@@ -31,7 +31,7 @@ export default function DashboardLayout({
       <DashboardSidebar />
       
       <SidebarInset className="bg-[#FDFDFF] dark:bg-black">
-        <header className="flex h-14 shrink-0 items-center justify-between px-6">
+        <header className="flex h-14 shrink-0 shadow-sm dark:shadow-white/5 items-center justify-between px-6">
           <div className="flex items-center gap-4">
              <SidebarTrigger className="text-slate-500 dark:text-zinc-400" />
           </div>

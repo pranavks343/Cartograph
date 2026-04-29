@@ -91,13 +91,13 @@ export function DashboardSidebar() {
                       className={cn(
                         "h-12 px-4 rounded-xl transition-all duration-200 border border-transparent",
                         isActive
-                          ? "bg-indigo-50 dark:bg-indigo-900/20 text-indigo-600 dark:text-indigo-400 font-bold hover:bg-indigo-100 dark:hover:bg-indigo-900/30"
+                          ? "bg-indigo-50! dark:bg-indigo-900/20! text-indigo-600! dark:text-indigo-400! font-bold hover:bg-indigo-100 dark:hover:bg-indigo-900/30"
                           : "text-slate-500 dark:text-zinc-400 hover:bg-slate-100 dark:hover:bg-zinc-900"
                       )}
                     >
                       <Link href={item.url}>
-                        <item.icon className={cn("w-5 h-5", isActive ? "text-indigo-600 dark:text-indigo-400" : "")} />
-                        <span className={cn("group-data-[collapsible=icon]:hidden", isActive ? "text-indigo-600 dark:text-indigo-400" : "")}>{item.title}</span>
+                        <item.icon className={cn("w-5 h-5", isActive ? "text-indigo-600! dark:text-indigo-400!" : "")} />
+                        <span className={cn("group-data-[collapsible=icon]:hidden", isActive ? "text-indigo-600! dark:text-indigo-400!" : "")}>{item.title}</span>
                       </Link>
                     </SidebarMenuButton>
                   </SidebarMenuItem>

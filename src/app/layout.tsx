@@ -1,7 +1,8 @@
-import type { Metadata } from "next";
-import { ThemeProvider } from "@/components/theme-provider";
-import { Roboto_Condensed } from "next/font/google";
 import "./globals.css";
+import type { Metadata } from "next";
+import { Roboto_Condensed } from "next/font/google";
+import { ThemeProvider } from "@/components/theme-provider";
+import { Toaster } from "@/components/ui/toaster";
 
 const robotoCondensed = Roboto_Condensed({
   subsets: ["latin"],
@@ -42,8 +43,8 @@ export default function RootLayout({
   return (
     <html 
       lang="en" 
-      suppressHydrationWarning 
       className={`${robotoCondensed.className} h-full antialiased`}
+      suppressHydrationWarning 
     >
       <body className="min-h-full flex flex-col">
         <ThemeProvider
@@ -52,6 +53,7 @@ export default function RootLayout({
           attribute="class"
           enableSystem
         >
+          <Toaster />
           {children}
         </ThemeProvider>
       </body>

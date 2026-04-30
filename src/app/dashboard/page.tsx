@@ -21,6 +21,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { authClient } from "@/lib/auth-client";
 import { useTheme } from "next-themes";
+import { useRouter } from "next/navigation";
 import axios from "axios";
 
 interface Repo {
@@ -37,11 +38,14 @@ export default function DashboardPage() {
     const [repoUrl, setRepoUrl] = useState("");
     const [isLoadingRepos, setIsLoadingRepos] = useState(false);
     const [repos, setRepos] = useState<Repo[]>([]);
+    const [isAnalyzing, setIsAnalyzing] = useState(false);
+    const router = useRouter();
     const { theme } = useTheme();
 
     useEffect(() => {
         const fetchRepos = async () => {
             setIsLoadingRepos(true);
+
             try {
                 const response = await axios.get("/api/repos");
                 setRepos(response.data);
@@ -56,6 +60,22 @@ export default function DashboardPage() {
             fetchRepos();
         }
     }, [session]);
+
+    const handleAnalyze = async () => {
+        if (!repoUrl) return;
+        
+        setIsAnalyzing(true);
+
+        try {
+            const response = await axios.post("/api/analyze", { repoUrl });
+            router.push(`/docs/${response.data.docId}`);
+        } catch (error) {
+            console.error("Error starting analysis:", error);
+            alert("Failed to start analysis. Please check the URL and try again.");
+        } finally {
+            setIsAnalyzing(false);
+        }
+    };
 
     const emptyStateImage = theme === "dark" ? "/dark-empty-state.png" : "/light-empty-state.png";
 
@@ -130,8 +150,18 @@ export default function DashboardPage() {
                                         />
                                     </div>
 
-                                    <Button className="h-10 md:h-11 px-6 md:px-4 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold gap-2 shadow-lg shadow-indigo-200 dark:shadow-none transition-all active:scale-95 text-xs md:text-sm">
-                                        Analyze <ArrowRight className="w-4 h-4" />
+                                    <Button 
+                                        onClick={handleAnalyze}
+                                        disabled={isAnalyzing || !repoUrl}
+                                        className="h-10 md:h-11 px-6 md:px-4 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold gap-2 shadow-lg shadow-indigo-200 dark:shadow-none transition-all active:scale-95 text-xs md:text-sm"
+                                    >
+                                        {isAnalyzing ? (
+                                            <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                                        ) : (
+                                            <>
+                                                Analyze <ArrowRight className="w-4 h-4" />
+                                            </>
+                                        )}
                                     </Button>
                                 </div>
                             </div>

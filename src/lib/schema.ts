@@ -45,3 +45,23 @@ export const account = pgTable("account", {
 	createdAt: timestamp("createdAt").notNull(),
 	updatedAt: timestamp("updatedAt").notNull(),
 });
+
+export const documents = pgTable("documents", {
+	id: text("id").primaryKey(),
+	userId: text("userId").notNull().references(() => user.id),
+	repoUrl: text("repoUrl").notNull(),
+	repoName: text("repoName").notNull(),
+	status: text("status").notNull(),
+	overview: text("overview"),
+	techStack: text("techStack"),
+	architectureSummary: text("architectureSummary"),
+	folderStructure: text("folderStructure"),
+	importantFiles: text("importantFiles"),
+	apiRoutes: text("apiRoutes"),
+	components: text("components"),
+	dependencies: text("dependencies"),
+	codebaseHealth: text("codebaseHealth"),
+	recentActivity: text("recentActivity"),
+	createdAt: timestamp("createdAt").notNull(),
+	updatedAt: timestamp("updatedAt").notNull(),
+});

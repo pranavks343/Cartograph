@@ -33,7 +33,7 @@ Whether you're onboarding to a new project or maintaining a complex monorepo, Re
 
 ## 🛠️ Tech Stack
 
-- **Framework**: [Next.js 14 (App Router)](https://nextjs.org/)
+- **Framework**: [Next.js 16 (App Router)](https://nextjs.org/)
 - **Language**: [TypeScript](https://www.typescriptlang.org/)
 - **Database**: [PostgreSQL](https://www.postgresql.org/) with [Drizzle ORM](https://orm.drizzle.team/)
 - **Vector DB**: [Pinecone](https://www.pinecone.io/) (for RAG context)

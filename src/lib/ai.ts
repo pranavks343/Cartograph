@@ -79,11 +79,12 @@ export const getCodebaseInsights = async (
     "overview": "General description",
     "techStack": ["React", "Next.js", ...],
     "architectureSummary": "High-level design",
-    "folderStructure": "Brief description of key directories",
+    "folderStructure": [{"path": "app/", "description": "Core application routes"}, ...],
+    "keyFeatures": ["Feature 1", "Feature 2", ...],
     "importantFiles": [{"path": "...", "reason": "..."}],
-    "apiRoutes": [{"path": "...", "description": "..."}],
+    "apiRoutes": [{"path": "...", "method": "GET/POST", "description": "..."}],
     "components": [{"name": "...", "description": "..."}],
-    "dependencies": [{"name": "...", "type": "Frontend/Backend/..."}],
+    "dependencies": [{"name": "...", "type": "Frontend/Backend/...", "version": "..."}],
     "codebaseHealth": {
       "maintainability": 0-100,
       "documentation": 0-100,
@@ -115,6 +116,7 @@ export const getCodebaseInsights = async (
   const result = await model.generateContent(prompt);
   const text = result.response.text();
   const jsonStr = text.replace(/```json\n?|\n?```/g, "").trim();
+  
   return JSON.parse(jsonStr);
 };
 

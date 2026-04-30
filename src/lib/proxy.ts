@@ -5,10 +5,7 @@ import { useEffect } from "react";
 export const useAuthProxy = () => {
     const pathname = usePathname();
     const router = useRouter();
-    const {
-        isPending,
-        data: session
-    } = authClient.useSession();
+    const { isPending, data: session } = authClient.useSession();
 
     useEffect(() => {
         if (isPending) return;
@@ -17,7 +14,8 @@ export const useAuthProxy = () => {
             if (pathname === "/login") {
                 router.push("/dashboard");
             }
-        } else {
+        } 
+        else {
             if (pathname.startsWith("/dashboard")) {
                 router.push("/");
             }

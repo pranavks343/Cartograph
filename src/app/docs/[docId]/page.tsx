@@ -5,7 +5,7 @@ import { notFound } from "next/navigation";
 import { DocView } from "./doc-view";
 import { ProcessingView } from "./processing-view";
 
-export default async function Page({ params }: { params: { docId: string } }) {
+export default async function Page({ params }: { params: Promise<{ docId: string }> }) {
   const { docId } = await params;
   
   const doc = await db.query.documents.findFirst({

@@ -110,5 +110,5 @@ Contributions are what make the open source community such an amazing place to l
 ---
 
 <div align="center">
-  <p>Built with ❤️ by the RepoMind Team</p>
+  <p>Built with ❤️ by Vivek</p>
 </div>

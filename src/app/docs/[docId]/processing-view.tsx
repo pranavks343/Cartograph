@@ -38,7 +38,7 @@ export function ProcessingView({ docId }: { docId: string }) {
         <div className="w-20 h-20 border-4 border-indigo-100 dark:border-zinc-900 rounded-full" />
         <div className="absolute top-0 w-20 h-20 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin" />
         <div className="absolute inset-0 flex items-center justify-center">
-          <Loader2 className="w-8 h-8 text-indigo-600 animate-pulse" />
+          <Loader2 className="w-8 h-8 text-indigo-600 animate-spin" />
         </div>
       </div>
       

@@ -20,7 +20,7 @@ async function puterChat(prompt: string): Promise<string> {
   if (!puterClient) throw new Error("PUTER_AUTH_TOKEN not set.");
 
   const response = await puterClient.chat.completions.create({
-    model: "gemini-2.0-flash",
+    model: "gemini-2.5-flash-lite",
     messages: [{ role: "user", content: prompt }],
   });
 

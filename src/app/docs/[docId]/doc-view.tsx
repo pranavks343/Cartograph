@@ -66,6 +66,8 @@ export function DocView({ doc }: { doc: any }) {
   const components = JSON.parse(doc.components || "[]");
   const dependencies = JSON.parse(doc.dependencies || "[]");
   const recentActivity = JSON.parse(doc.recentActivity || "[]");
+  const folderStructure = JSON.parse(doc.folderStructure && doc.folderStructure.startsWith('[') ? doc.folderStructure : "[]");
+  const keyFeatures = JSON.parse(doc.keyFeatures || "[]");
 
   return (
     <div className="flex-1 flex flex-col min-h-screen bg-[#F8FAFC] dark:bg-black">
@@ -166,23 +168,37 @@ export function DocView({ doc }: { doc: any }) {
                         </defs>
                       </svg>
                       <div className="absolute flex flex-col items-center">
-                        <span className="text-3xl font-black text-slate-900 dark:text-white">82</span>
+                        <span className="text-3xl font-black text-slate-900 dark:text-white">
+                          {codebaseHealth.overall || codebaseHealth.score || 0}
+                        </span>
                         <span className="text-[10px] text-slate-400 font-bold uppercase">/100</span>
                       </div>
                     </div>
                     <div className="mt-4 text-center">
-                      <p className="text-sm font-bold text-emerald-600 dark:text-emerald-400">Good</p>
+                      <p className={cn(
+                        "text-sm font-bold",
+                        (codebaseHealth.overall || 0) >= 80 ? "text-emerald-600 dark:text-emerald-400" :
+                        (codebaseHealth.overall || 0) >= 60 ? "text-amber-600 dark:text-amber-400" : "text-rose-600 dark:text-rose-400"
+                      )}>
+                        {codebaseHealth.status || "Analyzing..."}
+                      </p>
                       <p className="text-[11px] text-slate-400 font-medium">Overall Code Health</p>
                     </div>
                   </div>
                   <div className="space-y-3">
-                    {["Maintainability", "Documentation", "Test Coverage", "Security", "Structure"].map((m, i) => (
-                      <div key={m} className="space-y-1.5">
+                    {[
+                      { label: "Maintainability", value: codebaseHealth.maintainability || 0 },
+                      { label: "Documentation", value: codebaseHealth.documentation || 0 },
+                      { label: "Test Coverage", value: codebaseHealth.testCoverage || 0 },
+                      { label: "Security", value: codebaseHealth.security || 0 },
+                      { label: "Structure", value: codebaseHealth.structure || 0 },
+                    ].map((m) => (
+                      <div key={m.label} className="space-y-1.5">
                         <div className="flex justify-between text-[11px] font-medium">
-                          <span className="text-slate-500">{m}</span>
-                          <span className="text-slate-900 dark:text-white font-bold">{[85, 76, 68, 90, 87][i]}/100</span>
+                          <span className="text-slate-500">{m.label}</span>
+                          <span className="text-slate-900 dark:text-white font-bold">{m.value}/100</span>
                         </div>
-                        <Progress value={[85, 76, 68, 90, 87][i]} className="h-1 bg-slate-100 dark:bg-zinc-900" />
+                        <Progress value={m.value} className="h-1 bg-slate-100 dark:bg-zinc-900" />
                       </div>
                     ))}
                   </div>
@@ -196,20 +212,21 @@ export function DocView({ doc }: { doc: any }) {
                   <CardTitle className="text-base font-bold">Repository Structure</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-2 max-h-[400px] overflow-y-auto no-scrollbar">
-                  <div className="flex items-center gap-2 p-1 text-sm font-medium text-slate-900 dark:text-white">
+                  <div className="flex items-center gap-2 p-1 text-sm font-bold text-indigo-600 bg-indigo-50/50 dark:bg-indigo-900/10 rounded-lg">
                     <Folder className="w-4 h-4 text-indigo-500" /> {doc.repoName}/
                   </div>
-                  {["app/", "components/", "lib/", "prisma/", "public/", "styles/", "types/"].map(folder => (
-                    <div key={folder} className="flex items-center gap-2 pl-4 p-1 text-sm text-slate-500">
-                      <Folder className="w-4 h-4 text-slate-400" /> {folder}
-                      <span className="ml-auto text-[10px] text-slate-400 font-normal">Description...</span>
+                  {folderStructure.length > 0 ? folderStructure.map((folder: any) => (
+                    <div key={folder.path} className="flex items-center gap-2 pl-4 p-1 text-sm text-slate-500 group hover:bg-slate-50 dark:hover:bg-zinc-900 rounded-lg transition-colors">
+                      <Folder className="w-4 h-4 text-slate-400 group-hover:text-indigo-400 transition-colors" /> 
+                      <span className="font-medium text-slate-700 dark:text-zinc-300">{folder.path}</span>
+                      <span className="ml-auto text-[10px] text-slate-400 font-normal opacity-0 group-hover:opacity-100 transition-opacity">{folder.description}</span>
                     </div>
-                  ))}
-                  {["next.config.js", "package.json", "tsconfig.json"].map(file => (
-                    <div key={file} className="flex items-center gap-2 pl-4 p-1 text-sm text-slate-500">
-                      <File className="w-4 h-4 text-slate-300" /> {file}
+                  )) : (
+                    <div className="py-8 text-center">
+                      <Folder className="w-8 h-8 text-slate-200 mx-auto mb-2" />
+                      <p className="text-[11px] text-slate-400">Structure metadata pending...</p>
                     </div>
-                  ))}
+                  )}
                 </CardContent>
               </Card>
 
@@ -218,19 +235,19 @@ export function DocView({ doc }: { doc: any }) {
                   <CardTitle className="text-base font-bold">Key Features</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  {[
-                    "Authentication (Email, OAuth)",
-                    "Subscription & Billing (Stripe)",
-                    "User Dashboard",
-                    "API Routes & Server Actions",
-                    "Database with Prisma ORM",
-                    "Responsive UI with Tailwind CSS"
-                  ].map(f => (
-                    <div key={f} className="flex items-center gap-3">
-                      <CheckCircle2 className="w-4 h-4 text-emerald-500" />
-                      <span className="text-sm text-slate-600 dark:text-zinc-400">{f}</span>
+                  {keyFeatures.length > 0 ? keyFeatures.map((f: string) => (
+                    <div key={f} className="flex items-center gap-3 group">
+                      <div className="w-6 h-6 rounded-full bg-emerald-50 dark:bg-emerald-900/20 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
+                      </div>
+                      <span className="text-sm text-slate-600 dark:text-zinc-400 font-medium">{f}</span>
                     </div>
-                  ))}
+                  )) : (
+                    <div className="py-8 text-center">
+                      <Zap className="w-8 h-8 text-slate-200 mx-auto mb-2" />
+                      <p className="text-[11px] text-slate-400">Feature extraction pending...</p>
+                    </div>
+                  )}
                 </CardContent>
               </Card>
 
@@ -361,27 +378,59 @@ export function DocView({ doc }: { doc: any }) {
           </TabsContent>
 
           <TabsContent value="files" className="space-y-6">
-            <Card className="border-slate-200 dark:border-zinc-900 bg-white dark:bg-zinc-950 shadow-sm">
-              <CardHeader>
-                <CardTitle className="text-base font-bold flex items-center gap-2">
-                  <FileText className="w-5 h-5 text-indigo-500" /> Repository Explorer
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-1">
-                  <div className="flex items-center gap-2 p-2 text-sm font-bold text-indigo-600 bg-indigo-50/50 dark:bg-indigo-900/10 rounded-lg">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <Card className="md:col-span-1 border-slate-200 dark:border-zinc-900 bg-white dark:bg-zinc-950 shadow-sm h-fit">
+                <CardHeader>
+                  <CardTitle className="text-sm font-bold uppercase tracking-wider text-slate-400">Directory Structure</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-1">
+                  <div className="flex items-center gap-2 p-2 text-sm font-bold text-indigo-600 bg-indigo-50/50 dark:bg-indigo-900/10 rounded-lg mb-2">
                     <Folder className="w-4 h-4" /> {doc.repoName}
                   </div>
-                  {importantFiles.map((file: any) => (
-                    <div key={file.path} className="flex items-center gap-2 p-2 pl-6 text-sm text-slate-600 dark:text-zinc-400 hover:bg-slate-50 dark:hover:bg-zinc-900 rounded-lg cursor-pointer group">
-                      <File className="w-4 h-4 text-slate-400 group-hover:text-indigo-500 transition-colors" />
-                      <span className="flex-1 font-medium">{file.path}</span>
-                      <Badge variant="outline" className="text-[9px] opacity-0 group-hover:opacity-100 transition-opacity">Important</Badge>
+                  {folderStructure.map((folder: any) => (
+                    <div key={folder.path} className="flex items-center gap-2 p-2 pl-6 text-sm text-slate-600 dark:text-zinc-400 hover:bg-slate-50 dark:hover:bg-zinc-900 rounded-lg transition-colors cursor-pointer group">
+                      <Folder className="w-4 h-4 text-slate-400 group-hover:text-indigo-400 transition-colors" />
+                      <span className="font-medium">{folder.path}</span>
                     </div>
                   ))}
-                </div>
-              </CardContent>
-            </Card>
+                </CardContent>
+              </Card>
+
+              <Card className="md:col-span-2 border-slate-200 dark:border-zinc-900 bg-white dark:bg-zinc-950 shadow-sm">
+                <CardHeader className="flex flex-row items-center justify-between">
+                  <CardTitle className="text-base font-bold flex items-center gap-2">
+                    <FileText className="w-5 h-5 text-indigo-500" /> Critical Source Files
+                  </CardTitle>
+                  <Badge variant="secondary" className="text-[10px]">{importantFiles.length} Files Tagged</Badge>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-3">
+                    {importantFiles.length > 0 ? importantFiles.map((file: any) => (
+                      <div key={file.path} className="flex flex-col p-4 rounded-2xl border border-slate-100 dark:border-zinc-900 bg-slate-50/50 dark:bg-zinc-900/50 hover:border-indigo-200 dark:hover:border-indigo-900 transition-all group">
+                        <div className="flex items-center gap-3 mb-2">
+                          <div className="p-2 rounded-xl bg-white dark:bg-zinc-950 border border-slate-100 dark:border-zinc-800 shadow-sm group-hover:scale-110 transition-transform">
+                            <File className="w-4 h-4 text-indigo-500" />
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <p className="text-sm font-bold text-slate-900 dark:text-white truncate">{file.path}</p>
+                            <p className="text-[11px] text-slate-500 font-medium">Source File</p>
+                          </div>
+                          <Badge className="bg-indigo-500 hover:bg-indigo-600 text-[10px] font-black uppercase">Critical</Badge>
+                        </div>
+                        <p className="text-xs text-slate-500 leading-relaxed pl-12">
+                          {file.reason}
+                        </p>
+                      </div>
+                    )) : (
+                      <div className="py-20 text-center space-y-4">
+                        <FileText className="w-12 h-12 text-slate-200 mx-auto" />
+                        <p className="text-sm text-slate-400 font-medium">No files have been tagged as important yet.</p>
+                      </div>
+                    )}
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
           </TabsContent>
 
           <TabsContent value="components" className="space-y-6">
@@ -513,7 +562,6 @@ export function DocView({ doc }: { doc: any }) {
               </CardContent>
             </Card>
           </TabsContent>
-
         </Tabs>
       </main>
 

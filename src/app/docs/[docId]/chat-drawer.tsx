@@ -25,7 +25,7 @@ export function ChatDrawer({ isOpen, onClose, docId }: { isOpen: boolean, onClos
     if (!input.trim() || isLoading) return;
 
     const userMessage = input.trim();
-    
+
     setInput("");
     setMessages(prev => [...prev, { role: "user", content: userMessage }]);
     setIsLoading(true);
@@ -48,15 +48,15 @@ export function ChatDrawer({ isOpen, onClose, docId }: { isOpen: boolean, onClos
     <AnimatePresence>
       {isOpen && (
         <>
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
             className="fixed inset-0 bg-black/20 backdrop-blur-sm z-40"
           />
-          
-          <motion.div 
+
+          <motion.div
             initial={{ x: "100%" }}
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
@@ -108,18 +108,38 @@ export function ChatDrawer({ isOpen, onClose, docId }: { isOpen: boolean, onClos
                   </div>
                   <div className={cn(
                     "max-w-[85%] p-4 rounded-2xl text-sm leading-relaxed",
-                    msg.role === "bot" 
-                      ? "bg-slate-50 dark:bg-zinc-900 text-slate-800 dark:text-zinc-200 rounded-tl-none border border-slate-100 dark:border-zinc-800" 
+                    msg.role === "bot"
+                      ? "bg-slate-50 dark:bg-zinc-900 text-slate-800 dark:text-zinc-200 rounded-tl-none border border-slate-100 dark:border-zinc-800"
                       : "bg-indigo-600 text-white rounded-tr-none shadow-md shadow-indigo-100 dark:shadow-none"
                   )}>
                     {msg.role === "bot" ? (
-                      <div className="prose prose-sm dark:prose-invert max-w-none">
-                        <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                      <div className="prose prose-sm dark:prose-invert max-w-none prose-p:leading-relaxed prose-pre:bg-zinc-950 prose-pre:border prose-pre:border-zinc-800 prose-code:text-indigo-400 prose-code:bg-indigo-500/10 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-code:before:content-none prose-code:after:content-none prose-strong:text-indigo-600 dark:prose-strong:text-indigo-400 prose-ul:list-disc prose-ol:list-decimal">
+                        <ReactMarkdown
+                          remarkPlugins={[remarkGfm]}
+                          components={{
+                            code({ node, inline, className, children, ...props }: any) {
+                              const match = /language-(\w+)/.exec(className || '');
+                              return !inline && match ? (
+                                <div className="relative group">
+                                  <pre className="bg-zinc-950! p-4! rounded-xl! my-4! border! border-zinc-800! overflow-x-auto">
+                                    <code className={cn("text-xs font-mono text-zinc-300", className)} {...props}>
+                                      {children}
+                                    </code>
+                                  </pre>
+                                </div>
+                              ) : (
+                                <code className={cn("text-xs font-mono text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-500/10 px-1.5 py-0.5 rounded-md", className)} {...props}>
+                                  {children}
+                                </code>
+                              );
+                            }
+                          }}
+                        >
                           {msg.content}
                         </ReactMarkdown>
                       </div>
                     ) : (
-                      msg.content
+                      <p className="whitespace-pre-wrap">{msg.content}</p>
                     )}
                   </div>
                 </div>
@@ -142,15 +162,15 @@ export function ChatDrawer({ isOpen, onClose, docId }: { isOpen: boolean, onClos
 
             <div className="p-4 border-t border-slate-100 dark:border-zinc-900 bg-white dark:bg-zinc-950">
               <div className="relative">
-                <Input 
+                <Input
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   onKeyDown={(e) => e.key === "Enter" && handleSend()}
                   placeholder="Type your message..."
                   className="pr-12 h-12 bg-slate-50 dark:bg-zinc-900 border-slate-200 dark:border-zinc-800 rounded-xl focus:ring-indigo-600 focus:border-indigo-600"
                 />
-                <Button 
-                  size="icon" 
+                <Button
+                  size="icon"
                   disabled={!input.trim() || isLoading}
                   onClick={handleSend}
                   className="absolute right-1.5 top-1.5 h-9 w-9 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg shadow-sm"

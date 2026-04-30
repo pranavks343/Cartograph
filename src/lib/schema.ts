@@ -62,6 +62,7 @@ export const documents = pgTable("documents", {
 	dependencies: text("dependencies"),
 	codebaseHealth: text("codebaseHealth"),
 	recentActivity: text("recentActivity"),
+	keyFeatures: text("keyFeatures"),
 	createdAt: timestamp("createdAt").notNull(),
 	updatedAt: timestamp("updatedAt").notNull(),
 });

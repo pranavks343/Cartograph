@@ -1,11 +1,11 @@
 "use client";
 
-import { 
-  Search, 
-  Filter, 
-  ArrowRight, 
-  LayoutGrid, 
-  List, 
+import {
+  Search,
+  Filter,
+  ArrowRight,
+  LayoutGrid,
+  List,
   Plus,
   FileCode,
   Globe,
@@ -19,15 +19,35 @@ import { Card, CardContent } from "@/components/ui/card";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export function DocsList({ docs }: { docs: any[] }) {
   const [searchQuery, setSearchQuery] = useState("");
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
+  const [currentPage, setCurrentPage] = useState(1);
+  const docsPerPage = 6;
 
-  const filteredDocs = docs.filter(doc => 
+  const filteredDocs = docs.filter(doc =>
     doc.repoName.toLowerCase().includes(searchQuery.toLowerCase())
   );
+
+  const totalPages = Math.ceil(filteredDocs.length / docsPerPage);
+  const safeTotalPages = Math.max(totalPages, 1);
+  const pageStart = (currentPage - 1) * docsPerPage;
+  const paginatedDocs = filteredDocs.slice(pageStart, pageStart + docsPerPage);
+  const showingFrom = filteredDocs.length === 0 ? 0 : pageStart + 1;
+  const showingTo = Math.min(pageStart + docsPerPage, filteredDocs.length);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchQuery]);
+
+  useEffect(() => {
+    if (currentPage > safeTotalPages) {
+      setCurrentPage(safeTotalPages);
+    }
+  }, [currentPage, safeTotalPages]);
+
   return (
     <div className="flex-1 p-8 space-y-8 bg-[#FDFDFF] dark:bg-black overflow-y-auto">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
@@ -45,8 +65,8 @@ export function DocsList({ docs }: { docs: any[] }) {
       <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
         <div className="relative w-full md:w-96">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
-          <Input 
-            placeholder="Search docs..." 
+          <Input
+            placeholder="Search docs..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="pl-10 h-11 bg-white dark:bg-zinc-950 border-slate-200 dark:border-zinc-800 rounded-xl shadow-sm focus:ring-indigo-500"
@@ -57,17 +77,17 @@ export function DocsList({ docs }: { docs: any[] }) {
             All Repositories <Filter className="w-4 h-4" />
           </Button>
           <div className="flex bg-white dark:bg-zinc-950 border border-slate-200 dark:border-zinc-800 rounded-xl p-1 shadow-sm">
-            <Button 
-              variant="ghost" 
-              size="icon" 
+            <Button
+              variant="ghost"
+              size="icon"
               onClick={() => setViewMode("grid")}
               className={cn("h-9 w-9 rounded-lg", viewMode === "grid" ? "bg-indigo-50 dark:bg-indigo-900/20 text-indigo-600" : "text-slate-400")}
             >
               <LayoutGrid className="w-4 h-4" />
             </Button>
-            <Button 
-              variant="ghost" 
-              size="icon" 
+            <Button
+              variant="ghost"
+              size="icon"
               onClick={() => setViewMode("list")}
               className={cn("h-9 w-9 rounded-lg", viewMode === "list" ? "bg-indigo-50 dark:bg-indigo-900/20 text-indigo-600" : "text-slate-400")}
             >
@@ -81,7 +101,7 @@ export function DocsList({ docs }: { docs: any[] }) {
         "grid gap-6",
         viewMode === "grid" ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-3" : "grid-cols-1"
       )}>
-        {filteredDocs.map((doc, i) => (
+        {paginatedDocs.map((doc, i) => (
           <motion.div
             key={doc.id}
             initial={{ opacity: 0, y: 20 }}
@@ -157,7 +177,7 @@ export function DocsList({ docs }: { docs: any[] }) {
           </motion.div>
         ))}
 
-        {docs.length === 0 && (
+        {filteredDocs.length === 0 && (
           <div className="col-span-full py-20 text-center space-y-4">
             <div className="w-16 h-16 rounded-3xl bg-slate-50 dark:bg-zinc-900 flex items-center justify-center mx-auto">
               <FileCode className="w-8 h-8 text-slate-300" />
@@ -175,11 +195,46 @@ export function DocsList({ docs }: { docs: any[] }) {
         )}
       </div>
 
-      {docs.length > 0 && (
+      {filteredDocs.length > 0 && (
         <div className="flex items-center justify-between pt-8 border-t border-slate-100 dark:border-zinc-900">
-          <p className="text-xs text-slate-400 font-medium">Showing {docs.length} of {docs.length} repositories</p>
-          <div className="flex items-center gap-1">
-             <Button variant="outline" size="sm" disabled className="h-8 w-8 p-0 rounded-lg">1</Button>
+          <p className="text-xs text-slate-400 font-medium">
+            Showing {showingFrom}-{showingTo} of {filteredDocs.length} repositories
+          </p>
+          <div className="flex items-center gap-1 justify-end">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+              disabled={currentPage === 1}
+              className="h-8 rounded-lg"
+            >
+              Prev
+            </Button>
+            {Array.from({ length: safeTotalPages }, (_, idx) => idx + 1).map((page) => (
+              <Button
+                key={page}
+                variant={page === currentPage ? "default" : "outline"}
+                size="sm"
+                onClick={() => setCurrentPage(page)}
+                className={cn(
+                  "h-8 w-8 p-0 rounded-lg",
+                  page === currentPage
+                    ? "bg-indigo-600 hover:bg-indigo-700 text-white"
+                    : ""
+                )}
+              >
+                {page}
+              </Button>
+            ))}
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setCurrentPage((prev) => Math.min(prev + 1, safeTotalPages))}
+              disabled={currentPage === safeTotalPages}
+              className="h-8 rounded-lg"
+            >
+              Next
+            </Button>
           </div>
         </div>
       )}

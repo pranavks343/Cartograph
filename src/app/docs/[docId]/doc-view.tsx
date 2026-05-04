@@ -71,25 +71,25 @@ export function DocView({ doc }: { doc: any }) {
 
   return (
     <div className="flex-1 flex flex-col min-h-screen bg-[#F8FAFC] dark:bg-black">
-      <header className="px-8 py-6 border-b border-slate-200 dark:border-zinc-900 bg-white dark:bg-black flex items-center justify-between sticky top-0 z-20">
+      <header className="px-4 sm:px-6 lg:px-8 py-4 sm:py-6 border-b border-slate-200 dark:border-zinc-900 bg-white dark:bg-black flex items-center justify-between sticky top-0 z-20 gap-4">
         <div className="space-y-1">
-          <div className="flex items-center gap-2 text-xs text-slate-500 font-medium">
+          <div className="hidden sm:flex items-center gap-2 text-xs text-slate-500 font-medium">
             <span>Generated Docs</span>
             <ChevronRight className="w-3 h-3" />
             <span className="text-slate-900 dark:text-white">{doc.repoName}</span>
           </div>
           <div className="flex items-center gap-3">
-            <h1 className="text-2xl font-bold text-slate-900 dark:text-white">{doc.repoName}</h1>
+            <h1 className="text-lg sm:text-2xl font-bold text-slate-900 dark:text-white break-all">{doc.repoName}</h1>
             <a href={doc.repoUrl} target="_blank" rel="noreferrer" className="text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors">
               <SiGithub className="w-5 h-5" />
             </a>
-            <Badge variant="success" className="h-5 px-2 text-[10px]">Analyzed</Badge>
+            <Badge variant="success" className="hidden sm:inline-flex h-5 px-2 text-[10px]">Analyzed</Badge>
           </div>
-          <p className="text-xs text-slate-500">
+          <p className="hidden sm:block text-xs text-slate-500">
             Documentation generated on {formatDate(new Date(doc.updatedAt))} • 124 files analyzed
           </p>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="hidden md:flex items-center gap-3">
           <Button
             onClick={() => setIsChatOpen(true)}
             className="h-9 px-4 gap-2 text-xs font-bold bg-indigo-600 hover:bg-indigo-700 text-white shadow-lg shadow-indigo-100 dark:shadow-none"
@@ -99,9 +99,10 @@ export function DocView({ doc }: { doc: any }) {
         </div>
       </header>
 
-      <main className="p-8 max-w-7xl mx-auto w-full flex-1">
+      <main className="p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto w-full flex-1">
         <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-8">
-          <TabsList className="bg-transparent h-auto p-0 border-b border-slate-200 dark:border-zinc-900 w-full justify-start rounded-none gap-8">
+          <div className="w-full overflow-x-auto no-scrollbar border-b border-slate-200 dark:border-zinc-900">
+            <TabsList className="bg-transparent h-auto p-0 w-max min-w-full justify-start rounded-none gap-6 sm:gap-8 border-none">
             {["Overview", "Architecture", "Files", "APIs", "Components", "Dependencies", "Codebase Health", "Activity"].map(tab => (
               <TabsTrigger
                 key={tab}
@@ -119,7 +120,8 @@ export function DocView({ doc }: { doc: any }) {
                 {tab}
               </TabsTrigger>
             ))}
-          </TabsList>
+            </TabsList>
+          </div>
 
           <TabsContent value="overview" className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -569,6 +571,14 @@ export function DocView({ doc }: { doc: any }) {
         isOpen={isChatOpen}
         onClose={() => setIsChatOpen(false)} docId={doc.id}
       />
+      <div className="fixed right-4 bottom-4 z-30 md:hidden">
+        <Button
+          onClick={() => setIsChatOpen(true)}
+          className="h-11 px-4 gap-2 text-xs font-bold bg-indigo-600 hover:bg-indigo-700 text-white shadow-lg shadow-indigo-200 dark:shadow-none rounded-full"
+        >
+          <MessageSquare className="w-4 h-4" /> Ask RepoMind
+        </Button>
+      </div>
     </div>
   );
 }

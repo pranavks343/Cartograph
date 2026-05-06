@@ -1,114 +1,349 @@
 <div align="center">
-  <img src="./public/favicon.png" alt="RepoMind Logo" width="80" height="80" />
-  <h1>RepoMind</h1>
-  <p><strong>Transform your codebase into clarity with AI-powered intelligence.</strong></p>
 
-  [![Next.js](https://img.shields.io/badge/Next.js-14-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
-  [![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
-  [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3-38B2AC?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com/)
-  [![Drizzle](https://img.shields.io/badge/Drizzle-ORM-C5F74F?style=for-the-badge)](https://orm.drizzle.team/)
-  [![Pinecone](https://img.shields.io/badge/Pinecone-Vector_DB-27272a?style=for-the-badge)](https://www.pinecone.io/)
+# 🧠 RepoMind
+
+### Where Code Meets Clarity 💫🚀
+
+<img src="./public/favicon.png" alt="RepoMind Logo" width="140" height="140" style="border-radius: 20px; margin: 20px 0;" />
+
+**Transform Your Codebase into Intelligent Documentation in Seconds**
+
+RepoMind is a sophisticated AI-powered ecosystem that autonomously analyzes, documents, and monitors your repository's health.
+
+[![Next.js](https://img.shields.io/badge/Next.js-15-black?style=for-the-badge&logo=next.js&logoColor=white)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-4-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+[![Drizzle](https://img.shields.io/badge/Drizzle-ORM-C5F74F?style=for-the-badge)](https://orm.drizzle.team/)
+[![Pinecone](https://img.shields.io/badge/Pinecone-Vector_DB-27272a?style=for-the-badge)](https://www.pinecone.io/)
+[![Gemini AI](https://img.shields.io/badge/Gemini-AI-8E75FF?style=for-the-badge&logo=google&logoColor=white)](https://ai.google.dev/)
+
+[🚀 Get Started](#getting-started) • [📖 Features](#-features-that-fascinate) • [🤝 Contributing](#-contributing) • [⭐ Star Us](https://github.com/Vivek-736/RepoMind)
+
 </div>
 
----
+<br/>
 
-## 🚀 Overview
+<div align="center">
 
-RepoMind is a sophisticated repository analysis platform designed to give developers and teams an instant, high-fidelity understanding of any codebase. By leveraging state-of-the-art Large Language Models (LLMs) and Vector Databases, RepoMind automates the process of architectural review, documentation generation, and health assessment.
+## 🎯 **The Future of Codebase Intelligence**
 
-Whether you're onboarding to a new project or maintaining a complex monorepo, RepoMind acts as your AI co-pilot, surfacing critical insights that usually take weeks to manually document.
+</div>
 
-## ✨ Key Features
+<div align="center">
 
-- **🧠 Deep Codebase Intelligence**: Automatically extracts system architecture, key product features, and folder structures using Google Gemini & Puter AI.
-- **🛡️ Codebase Health Analytics**: Get an instant "Health Score" based on maintainability, documentation quality, security posture, and structural integrity.
-- **💬 Ask RepoMind (RAG)**: Chat directly with your codebase. Ask about implementation details, bug hunting, or refactoring strategies using high-performance vector search (Pinecone).
-- **📂 Automated Doc-Gen**: Generates comprehensive views for:
-  - **System Architecture**: High-level design patterns and data flows.
-  - **API Explorer**: Automatic discovery of routes, methods, and descriptions.
-  - **Component Library**: Deep dive into your frontend UI architecture.
-  - **Dependency Mapping**: Visualize your tech stack and library versions.
-- **📊 Interactive Dashboard**: Manage your entire repository portfolio with real-time analysis status and aggregate health metrics.
-- **⚡ Background Pipeline**: Powered by **Inngest**, ensuring robust, asynchronous analysis that scales with your repository size.
+```ascii
+╔══════════════════════════════════════════════════════════════╗
+║                                                              ║
+║     🧠 Deep Code Analysis    •  🛡️ Robust Health Metrics    ║
+║     💬 Semantic Code Chat    •  📂 Auto-Documentation       ║
+║     📊 Activity Tracking     •  ⚡ Background Pipelines     ║
+║                                                              ║
+╚══════════════════════════════════════════════════════════════╝
+```
 
-## 🛠️ Tech Stack
+</div>
 
-- **Framework**: [Next.js 16 (App Router)](https://nextjs.org/)
-- **Language**: [TypeScript](https://www.typescriptlang.org/)
-- **Database**: [PostgreSQL](https://www.postgresql.org/) with [Drizzle ORM](https://orm.drizzle.team/)
-- **Vector DB**: [Pinecone](https://www.pinecone.io/) (for RAG context)
-- **AI Models**: Google Gemini 2.0/2.5 via [Puter.ai](https://puter.com/)
-- **Background Tasks**: [Inngest](https://www.inngest.com/)
-- **Authentication**: [Better-Auth](https://better-auth.com/)
-- **Styling**: [Tailwind CSS](https://tailwindcss.com/) & [Shadcn UI](https://ui.shadcn.com/)
+<br/>
 
-## 🏁 Getting Started
+## 🌈 **Why RepoMind?**
 
-### Prerequisites
+> **"Don't just write code — understand it."** 
+> 
+> RepoMind isn't just a documentation tool. It's your repository's digital twin, powered by RAG and LLMs to provide context-aware insights that manual documentation could never match.
 
-- Node.js 18+ 
-- PostgreSQL Database
-- Pinecone API Key
-- Puter Auth Token / Google Gemini API Key
+### 💎 **What Makes Us Different**
 
-### Installation
+<table>
+<tr>
+<td width="33%" align="center">
+<img src="https://img.icons8.com/fluency/96/artificial-intelligence.png" width="60"/>
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/Vivek-736/RepoMind.git
-   cd repo-mind
-   ```
+**AI-Native**
 
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
+Powered by Gemini 2.0 Flash for lightning-fast architectural parsing and reasoning.
+</td>
+<td width="33%" align="center">
+<img src="https://img.icons8.com/fluency/96/shield.png" width="60"/>
 
-3. **Environment Setup**
-   Create a `.env` file in the root and add your credentials:
-   ```env
-   DATABASE_URL=your_postgres_url
-   NEXT_PUBLIC_APP_URL=http://localhost:3000
-   
-   # AI Providers
-   PUTER_AUTH_TOKEN=your_puter_token
-   GEMINI_API_KEY=your_google_gemini_key
-   
-   # Vector DB
-   PINECONE_API_KEY=your_pinecone_key
-   
-   # Github Auth
-   GITHUB_CLIENT_ID=your_id
-   GITHUB_CLIENT_SECRET=your_secret
-   ```
+**Health-First**
 
-4. **Database Migration**
-   ```bash
-   npx drizzle-kit push
-   ```
+Instant health scores based on maintainability, documentation quality, and security.
+</td>
+<td width="33%" align="center">
+<img src="https://img.icons8.com/fluency/96/chat.png" width="60"/>
 
-5. **Start the Development Server**
-   ```bash
-   npm run dev
-   ```
+**Context-Aware**
 
-6. **Start Inngest Dev Server**
-   ```bash
-   npx inngest-cli@latest dev
-   ```
+RAG-powered chat using Pinecone ensures you're talking to your actual code, not generic LLMs.
+</td>
+</tr>
+</table>
 
-## 🤝 Contributing
-
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+<br/>
 
 ---
 
 <div align="center">
-  <p>Built with ❤️ by Vivek</p>
+
+## 🎨 **Features That Fascinate**
+
+Every feature designed to make codebase management intelligent and effective
+
+</div>
+
+<br/>
+
+### 🏛️ **Advanced Repository Management**
+<details open>
+<summary><b>Click to explore core engine features</b></summary>
+
+<br/>
+
+| Feature | Description | Impact |
+|---------|-------------|--------|
+| **🤖 Architectural Parsing** | High-fidelity extraction of system design & data flows | ⚡ 10x faster onboarding |
+| **🛡️ Health Analytics** | Real-time "Health Score" across 5 critical dimensions | 📈 Reduced tech debt |
+| **💬 Semantic Chat** | Natural language queries via high-performance RAG | 💎 Instant implementation insights |
+| **📊 Activity Stream** | Continuous monitoring of repository changes and syncs | 🌍 Total visibility |
+
+</details>
+
+<br/>
+
+### 🧠 **Intelligent Analysis Arsenal**
+
+<table>
+<tr>
+<td width="50%">
+
+#### 🛡️ **Codebase Health Scoring**
+```
+✓ Maintainability Analysis
+✓ Documentation Coverage
+✓ Security Vulnerability Check
+✓ Structural Integrity Audit
+✓ Test Coverage Metrics
+```
+
+A comprehensive radar chart of your repository's quality, updated with every analysis.
+
+</td>
+<td width="50%">
+
+#### 💬 **Ask RepoMind (RAG)**
+```
+✓ Natural Language Interface
+✓ Pinecone Vector Search
+✓ Context-Aware Reasoning
+✓ Implementation Strategies
+✓ Bug Hunting Assistant
+```
+
+Chat directly with your codebase. No more manual searching through files.
+
+</td>
+</tr>
+<tr>
+<td width="50%">
+
+#### 📂 **Automated Documentation**
+```
+✓ System Architecture Maps
+✓ API Explorer (Auto-discovered)
+✓ Component Library Deep-dive
+✓ Dependency Relationship Mapping
+✓ Markdown Export Support
+```
+
+Professional-grade documentation generated in seconds, not weeks.
+
+</td>
+<td width="50%">
+
+#### ⚡ **Background Pipeline**
+```
+✓ Powered by Inngest
+✓ Robust Asynchronous Analysis
+✓ Horizontal Scalability
+✓ Retriable Job Queues
+✓ Real-time Progress Tracking
+```
+
+Heavy-duty processing that stays out of your way while providing deep insights.
+
+</td>
+</tr>
+</table>
+
+<br/>
+
+### 💫 **Experience Excellence**
+
+<div align="center">
+
+| 🎨 Design | 🚀 Performance | 🔒 Security |
+|-----------|----------------|-------------|
+| Sleek Dark Mode UI | Next.js 15 App Router | Better-Auth Integration |
+| Framer Motion Animations | Drizzle ORM Type-Safety | Encrypted Connection Strings |
+| Responsive Dashboard | Edge-ready Serverless | Role-based Access Control |
+| Interactive Diagrams | Bun-optimized Build | Secure API Gateway |
+
+</div>
+
+<br/>
+
+---
+
+<div align="center">
+
+## 🛠️ **Tech Stack That Powers Innovation**
+
+*Built with bleeding-edge technologies for maximum precision*
+
+</div>
+
+<br/>
+
+<table align="center">
+<tr>
+<td width="50%" valign="top">
+
+### **⚡ Frontend Excellence**
+
+```typescript
+┌─────────────────────────────────┐
+│  🎯 Framework & Core            │
+├─────────────────────────────────┤
+│  Next.js 15        │ App Router │
+│  React 19          │ Server RSC │
+│  TypeScript 5      │ Type Safe  │
+└─────────────────────────────────┘
+
+┌─────────────────────────────────┐
+│  🎨 UI & Styling                │
+├─────────────────────────────────┤
+│  Tailwind CSS 4    │ Modern CSS │
+│  Shadcn UI         │ Components │
+│  Framer Motion     │ Animations │
+│  Lucide Icons      │ Visuals    │
+└─────────────────────────────────┘
+```
+
+**Why This Stack?**
+- 🚀 Blazing fast page loads
+- 🎨 Premium dark-mode aesthetics
+- 📱 Perfectly responsive layouts
+
+</td>
+<td width="50%" valign="top">
+
+### **💪 Backend Power**
+
+```typescript
+┌─────────────────────────────────┐
+│  🗄️ Database & Vector           │
+├─────────────────────────────────┤
+│  PostgreSQL        │ Neon Cloud │
+│  Drizzle ORM       │ Type-safe  │
+│  Pinecone          │ Vector DB  │
+└─────────────────────────────────┘
+
+┌─────────────────────────────────┐
+│  🤖 AI & Orchestration          │
+├─────────────────────────────────┤
+│  Gemini 2.0 Flash  │ LLM Engine │
+│  Inngest           │ Workflows  │
+│  Better-Auth       │ Security   │
+│  Puter AI          │ Providers  │
+└─────────────────────────────────┘
+```
+
+**Why This Stack?**
+- 🧠 SOTA AI Reasoning
+- ⚡ Event-driven architecture
+- 🔒 Enterprise-grade security
+
+</td>
+</tr>
+</table>
+
+---
+
+## 🚀 **Installation**
+
+### Prerequisites
+- Node.js 20+ (Bun recommended)
+- PostgreSQL Database (Neon)
+- Pinecone API Key
+- Gemini API Key / Puter Token
+
+### Quick Start
+
+1. **Clone the repository**
+```bash
+git clone https://github.com/Vivek-736/RepoMind.git
+cd repo-mind
+```
+
+2. **Install dependencies**
+```bash
+npm install # or bun install
+```
+
+3. **Environment Setup**
+```bash
+# Create .env file
+cp .env.example .env
+
+# Configure keys
+DATABASE_URL=your_postgres_url
+NEXT_PUBLIC_APP_URL=http://localhost:3000
+PUTER_AUTH_TOKEN=your_token
+GEMINI_API_KEY=your_key
+PINECONE_API_KEY=your_key
+GITHUB_CLIENT_ID=...
+GITHUB_CLIENT_SECRET=...
+```
+
+4. **Database Push**
+```bash
+npx drizzle-kit push
+```
+
+5. **Start Servers**
+```bash
+# App
+npm run dev
+
+# Inngest (New terminal)
+npx inngest-cli@latest dev
+```
+
+---
+
+## 🎯 **Usage Guide**
+
+### **Analyzing a Repo**
+1. Connect your GitHub account via the Dashboard.
+2. Select a repository or paste a public URL.
+3. Watch the Inngest pipeline trigger the AI analysis.
+4. Explore the generated architecture and documentation.
+
+### **Interacting with Code**
+1. Navigate to the **Chat** tab in any analyzed repo.
+2. Ask questions like: "How does the authentication flow work?" or "Where is the database schema defined?".
+3. Use the **Health** tab to identify technical debt hotspots.
+
+---
+
+## 🧑‍💻 **Meet The Developer**
+
+<div align="center">
+  
+### 💜 Built with Passion by [Vivek](https://github.com/Vivek-736)
+
+[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Vivek-736)
+
+Built for the future of engineering.
+
 </div>

@@ -88,7 +88,7 @@ export default function DashboardPage() {
 
     return (
         <main className="flex flex-col gap-6 p-4 md:p-8 pt-0 max-w-7xl mx-auto w-full">
-            <div className="flex flex-col lg:items-start items-center gap-1 lg:-mt-2 mt-2">
+            <div className="flex flex-col lg:items-start items-center gap-1 lg:-mt-2 mt-6">
                 <h1 className="text-xl md:text-3xl font-black text-slate-900 dark:text-white tracking-tight">
                     Welcome back, {session?.user?.name || "Vivek"} 👋
                 </h1>

@@ -19,6 +19,7 @@ import {
   SidebarGroup,
   SidebarGroupContent,
   SidebarRail,
+  useSidebar,
 } from "@/components/ui/sidebar";
 import {
   DropdownMenu,
@@ -55,6 +56,7 @@ export function DashboardSidebar() {
   const { 
     data: session 
   } = authClient.useSession();
+  const { setOpenMobile, isMobile } = useSidebar();
 
   const handleSignOut = async () => {
     await authClient.signOut({
@@ -95,7 +97,14 @@ export function DashboardSidebar() {
                           : "text-slate-500 dark:text-zinc-400 hover:bg-slate-100 dark:hover:bg-zinc-900"
                       )}
                     >
-                      <Link href={item.url}>
+                      <Link 
+                        href={item.url}
+                        onClick={() => {
+                          if (isMobile) {
+                            setOpenMobile(false);
+                          }
+                        }}
+                      >
                         <item.icon className={cn("w-5 h-5", isActive ? "text-indigo-600! dark:text-indigo-400!" : "")} />
                         <span className={cn("group-data-[collapsible=icon]:hidden", isActive ? "text-indigo-600! dark:text-indigo-400!" : "")}>{item.title}</span>
                       </Link>

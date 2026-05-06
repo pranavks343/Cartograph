@@ -12,12 +12,9 @@ RepoMind is a sophisticated AI-powered ecosystem that autonomously analyzes, doc
 
 [![Next.js](https://img.shields.io/badge/Next.js-15-black?style=for-the-badge&logo=next.js&logoColor=white)](https://nextjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind-4-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 [![Drizzle](https://img.shields.io/badge/Drizzle-ORM-C5F74F?style=for-the-badge)](https://orm.drizzle.team/)
 [![Pinecone](https://img.shields.io/badge/Pinecone-Vector_DB-27272a?style=for-the-badge)](https://www.pinecone.io/)
 [![Gemini AI](https://img.shields.io/badge/Gemini-AI-8E75FF?style=for-the-badge&logo=google&logoColor=white)](https://ai.google.dev/)
-
-[🚀 Get Started](#getting-started) • [📖 Features](#-features-that-fascinate) • [🤝 Contributing](#-contributing) • [⭐ Star Us](https://github.com/Vivek-736/RepoMind)
 
 </div>
 

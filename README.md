@@ -101,10 +101,10 @@ Every feature designed to make codebase management intelligent and effective
 
 | Feature | Description | Impact |
 |---------|-------------|--------|
-| **🤖 Architectural Parsing** | High-fidelity extraction of system design & data flows | ⚡ 10x faster onboarding |
-| **🛡️ Health Analytics** | Real-time "Health Score" across 5 critical dimensions | 📈 Reduced tech debt |
-| **💬 Semantic Chat** | Natural language queries via high-performance RAG | 💎 Instant implementation insights |
-| **📊 Activity Stream** | Continuous monitoring of repository changes and syncs | 🌍 Total visibility |
+| **🤖 Codebase Parsing** | High-fidelity extraction of system design | ⚡ 10x faster onboarding |
+| **🛡️ Health Analytics** | Real-time "Health Score" across dimensions | 📈 Reduced tech debt |
+| **💬 Semantic Chat** | Natural language queries via performant RAG | 💎 Instant insights |
+| **📊 Activity Stream** | Continuous monitoring of repository changes | 🌍 Total visibility |
 
 </details>
 

@@ -1,24 +1,35 @@
 import { NextResponse } from "next/server";
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import { getEmbedding } from "@/lib/ai";
-import { Pinecone } from "@pinecone-database/pinecone";
+import { getEmbedding, getPinecone } from "@/lib/ai";
 import OpenAI from "openai";
 
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
 const PUTER_AUTH_TOKEN = process.env.PUTER_AUTH_TOKEN;
 
-const puterClient = PUTER_AUTH_TOKEN
-  ? new OpenAI({
-      baseURL: "https://api.puter.com/puterai/openai/v1/",
-      apiKey: PUTER_AUTH_TOKEN,
-    })
-  : null;
+let _puterClient: OpenAI | null = null;
 
-const pc = new Pinecone({
-  apiKey: process.env.PINECONE_DB_API_KEY!,
-});
+function getPuterClient() {
+  if (!PUTER_AUTH_TOKEN) return null;
+
+  _puterClient ??= new OpenAI({
+    baseURL: "https://api.puter.com/puterai/openai/v1/",
+    apiKey: PUTER_AUTH_TOKEN,
+  });
+
+  const puterClient = _puterClient;
+  return puterClient;
+}
+
+let _genAI: GoogleGenerativeAI | null = null;
+
+function getGenAI() {
+  _genAI ??= new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
+
+  const genAI = _genAI;
+  return genAI;
+}
 
 async function puterChat(prompt: string): Promise<string> {
+  const puterClient = getPuterClient();
   if (!puterClient) throw new Error("PUTER_AUTH_TOKEN not set.");
 
   const response = await puterClient.chat.completions.create({
@@ -43,7 +54,7 @@ export async function POST(req: Request) {
       });
     }
 
-    const index = pc.index(process.env.PINECONE_INDEX_NAME!);
+    const index = getPinecone().index({ name: process.env.PINECONE_INDEX_NAME! });
     const queryResponse = await index.query({
       vector: embedding,
       topK: 5,
@@ -66,7 +77,7 @@ export async function POST(req: Request) {
     User Question:
     ${message}`;
 
-    if (puterClient) {
+    if (getPuterClient()) {
       try {
         const text = await puterChat(prompt);
         return NextResponse.json({ response: text });
@@ -75,7 +86,7 @@ export async function POST(req: Request) {
       }
     }
 
-    const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+    const model = getGenAI().getGenerativeModel({ model: "gemini-2.5-flash" });
     const result = await model.generateContent(prompt);
     
     return NextResponse.json({ response: result.response.text() });

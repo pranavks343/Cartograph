@@ -1,0 +1,58 @@
+# Which Kubernetes API group/version this object belongs to
+apiVersion: apps/v1
+
+# Type of Kubernetes object
+kind: Deployment
+
+# Basic information about the Deployment
+metadata:
+  # Name of the Deployment
+  name: repomind-web
+
+  # Labels attached to the Deployment object itself
+  labels:
+    app: repomind
+
+# Desired state of the Deployment
+spec:
+
+  # Keep 2 Pods running at all times
+  replicas: 2
+
+  # Deployment identifies/manages Pods using these labels
+  # MUST match template.metadata.labels below
+  selector:
+    matchLabels:
+      app: repomind
+
+  # Blueprint/template for creating Pods
+  template:
+
+    # Labels added to every Pod created by this Deployment
+    metadata:
+      labels:
+        app: repomind
+
+    # Actual Pod specification
+    spec:
+
+      # List of containers inside the Pod
+      containers:
+
+        # Container name
+        - name: web
+
+          # Docker image to pull from Docker Hub
+          image: pranavks28/repomind:v1
+
+          # Port exposed/listened to inside the container
+          ports:
+            - containerPort: 3000
+
+          # Environment variables inside the container
+          env:
+
+            # App listens on all network interfaces
+            # Allows Kubernetes Services/other Pods to reach it
+            - name: HOSTNAME
+              value: "0.0.0.0"
